@@ -1,4 +1,4 @@
-import Layout from "@/componnents/Layout";
+import Layout from "@/components/Layout";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { z } from "zod";

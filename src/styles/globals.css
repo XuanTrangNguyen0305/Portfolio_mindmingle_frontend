@@ -1,0 +1,49 @@
+.editor {
+  display: flex;
+
+  border: 2px solid black;
+  justify-content: space-between;
+  /* align-items: stretch; */
+}
+
+.order-viewer {
+  border: 1px solid hotpink;
+  width: 40vw;
+  padding: 2rem;
+}
+
+.order-form {
+  width: 40vw;
+  border: 2px solid hotpink;
+  padding: 2rem;
+}
+
+.order-text {
+  word-break: break-all;
+  white-space: normal;
+}
+
+.option-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.option-choices {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  width: 30%;
+}
+
+.ice-button {
+  border: none;
+  background-color: blue;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10%;
+}
+.cup-button {
+  display: flex;
+  flex-direction: column;
+}
