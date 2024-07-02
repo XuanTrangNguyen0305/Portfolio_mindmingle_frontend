@@ -26,10 +26,6 @@ const Navbar = () => {
         <li>
           <Link href="/">Home</Link>
         </li>
-        <li>
-          <Link href="/menu-items">Menu</Link>
-        </li>
-        {/* {isLoggedIn && <li><Link href="/my-drinks">My drinks</Link></li>} */}
         {!isLoggedIn && (
           <li>
             <Link href="/register">Register</Link>

@@ -1,4 +1,14 @@
+import {
+  Box,
+  // CameraControls,
+  Environment,
+  OrbitControls,
+  Stage,
+} from "@react-three/drei";
 import { Order } from "./OrderForm";
+import { Canvas } from "@react-three/fiber";
+import Cup from "./3D/Cup";
+import Topping from "./3D/Topping";
 
 interface ViewerProps {
   order: Order;
@@ -7,46 +17,80 @@ interface ViewerProps {
 interface ViewIceLevelProps {
   iceLevelId: number;
 }
+
+interface ViewToppingProps {
+  toppingId: number;
+}
+interface ViewCupProps {
+  cupId: number;
+}
 const ViewIceLevel = (props: ViewIceLevelProps) => {
   if (props.iceLevelId === 1) {
-    return <p>❌</p>;
+    return null;
   }
   if (props.iceLevelId === 2) {
-    return <p>🧊</p>;
+    return (
+      <Box scale={1}>
+        <meshLambertMaterial color={"blue"} />
+      </Box>
+    );
   }
   if (props.iceLevelId === 3) {
-    return <p>🧊🧊</p>;
+    return (
+      <group>
+        <Box material-color="blue" position={[-1, 0, 0]} />
+        <Box material-color="blue" position={[1, 0, 0]} />
+      </group>
+    );
   }
   if (props.iceLevelId === 4) {
-    return <p>🧊🧊🧊</p>;
+    return (
+      <group>
+        <Box material-color="blue" position={[-1, 0, 0]} />
+        <Box material-color="blue" position={[1, 0, 0]} />
+        <Box material-color="blue" position={[0, 0, 2]} />
+      </group>
+    );
   }
   console.log("INVALID ICE LEVEL");
   return null;
 };
 
-interface ViewCupProps {
-  cupId: number;
-}
 const ViewCup = (props: ViewCupProps) => {
   if (props.cupId === 1) {
-    return <p>🥤</p>;
+    return <Cup />;
   }
   if (props.cupId === 2) {
-    return <p>🐼</p>;
+    return <Cup />;
   }
   if (props.cupId === 3) {
-    return <p>🐻</p>;
+    return <Cup />;
   }
   if (props.cupId === 4) {
-    return <p>🎁</p>;
+    return <Cup />;
+  }
+};
+
+const ViewToppings = (props: ViewToppingProps) => {
+  if (props.toppingId === 1) {
+    return <Topping />;
   }
 };
 
 const Viewer = ({ order }: ViewerProps) => {
   return (
-    <div>
-      <ViewIceLevel iceLevelId={order.iceLevelId} />
-      <ViewCup cupId={order.cupId} />
+    <div className="canvas-box">
+      {/* <ViewCup cupId={order.cupId} /> */}
+      <Canvas>
+        <OrbitControls />
+
+        <Stage>
+          <Environment preset="sunset" background={true} />
+          <ViewCup cupId={order.cupId} />
+          {/* <ViewIceLevel iceLevelId={order.iceLevelId} /> */}
+          <ViewToppings toppingId={order.toppingId} />
+        </Stage>
+      </Canvas>
     </div>
   );
   // <p className="order-text">{JSON.stringify(order)}</p>;
