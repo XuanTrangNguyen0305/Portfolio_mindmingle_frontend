@@ -38,7 +38,7 @@ const OptionValidator = z.object({
     z.object({ id: z.number(), name: z.string(), price: z.number() })
   ),
 });
-type Options = z.infer<typeof OptionValidator>;
+export type Options = z.infer<typeof OptionValidator>;
 
 const OrderForm = () => {
   const [order, setOrder] = useState<Order>({
@@ -92,6 +92,7 @@ const OrderForm = () => {
 
       if (response.ok) {
         console.log("Order submitted successfully");
+        Router.push("/orders");
       } else {
         console.error("Failed to submit order");
       }
@@ -104,9 +105,6 @@ const OrderForm = () => {
     return <p>Loading...</p>;
   }
 
-  const handleClick = () => {
-    Router.push("/orders");
-  };
   return (
     <main className="editor">
       <div className="order-viewer">
@@ -121,12 +119,14 @@ const OrderForm = () => {
             {options.teas.map((tea) => {
               return (
                 <button
+                  type="button"
                   className="tea-button"
                   onClick={() => {
                     setOrder({ ...order, teaId: tea.id });
                   }}
                 >
-                  {tea.name}
+                  <h4>{tea.name}</h4>
+                  <h4> {tea.price} €</h4>
                 </button>
               );
             })}
@@ -137,12 +137,14 @@ const OrderForm = () => {
             {options.milk.map((milk) => {
               return (
                 <button
+                  type="button"
                   className="milk-button"
                   onClick={() => {
                     setOrder({ ...order, milkId: milk.id });
                   }}
                 >
-                  {milk.name}
+                  <h4>{milk.name}</h4>
+                  <h4> {milk.price}€</h4>
                 </button>
               );
             })}
@@ -153,6 +155,7 @@ const OrderForm = () => {
             {options.flavors.map((flavor) => {
               return (
                 <button
+                  type="button"
                   className="flavor-button"
                   onClick={() => {
                     setOrder({ ...order, flavorId: flavor.id });
@@ -169,6 +172,7 @@ const OrderForm = () => {
             {options.toppings.map((topping) => {
               return (
                 <button
+                  type="button"
                   className="topping-button"
                   onClick={() => {
                     setOrder({ ...order, toppingId: topping.id });
@@ -184,6 +188,7 @@ const OrderForm = () => {
             {options.iceLevels.map((iceLvl) => {
               return (
                 <button
+                  type="button"
                   className="ice-button"
                   onClick={() => {
                     setOrder({ ...order, iceLevelId: iceLvl.id });
@@ -200,6 +205,7 @@ const OrderForm = () => {
             {options.sugarLevels.map((sugarLvl) => {
               return (
                 <button
+                  type="button"
                   className="sugar-button"
                   onClick={() => {
                     setOrder({ ...order, sugarLevelId: sugarLvl.id });
@@ -216,19 +222,19 @@ const OrderForm = () => {
             {options.cups.map((cup) => {
               return (
                 <button
+                  type="button"
                   className="cup-button"
                   onClick={() => {
                     setOrder({ ...order, cupId: cup.id });
                   }}
                 >
-                  {cup.name}
+                  <h4>{cup.name}</h4>
+                  <h4>{cup.price}€</h4>
                 </button>
               );
             })}
           </div>
-          <button type="submit" onClick={handleClick}>
-            Submit
-          </button>
+          <button type="submit">Submit</button>
         </div>
       </form>
     </main>
