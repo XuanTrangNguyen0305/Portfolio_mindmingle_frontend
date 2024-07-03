@@ -22,6 +22,7 @@ interface Order {
   };
   tea: {
     name: string;
+    price: number;
   };
   milk: {
     name: string;
@@ -65,6 +66,7 @@ const OrderPage = () => {
 
         <h4>Tea</h4>
         <p>{tea.name}</p>
+        <p>{tea.price}€</p>
 
         <h4>Milk</h4>
         <p>{milk.name}</p>
@@ -80,11 +82,11 @@ const OrderPage = () => {
 
         <h4>Size</h4>
         <p>{size.name}</p>
-        <p>{size.price}</p>
+        <p>{size.price}€</p>
 
         <h4>Cup</h4>
         <p>{cup.name}</p>
-        <p>{cup.price}</p>
+        <p>{cup.price}€</p>
 
         <h4>Topping</h4>
         <p>{topping.name}</p>
