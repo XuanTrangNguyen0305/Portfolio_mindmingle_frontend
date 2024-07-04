@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,33 +16,34 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      style={{
-        padding: "1rem",
-        background: "#f8f9fa",
-        borderBottom: "1px solid #dee2e6",
-      }}
-    >
-      <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        {!isLoggedIn && (
+    <div className="nav-bar-logo">
+      <Logo />
+      <nav className="nav-bar">
+        <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
           <li>
-            <Link href="/register">Register</Link>
+            <Link className="home" href="/">
+              Home
+            </Link>
           </li>
-        )}
-        {isLoggedIn ? (
-          <li>
-            <button onClick={logOut}>Log out</button>
-          </li>
-        ) : (
-          <li>
-            <Link href="/login">Login</Link>
-          </li>
-        )}
-      </ul>
-    </nav>
+          {!isLoggedIn && (
+            <li>
+              <Link href="/register">Register</Link>
+            </li>
+          )}
+          {isLoggedIn ? (
+            <li>
+              <button className="logout" onClick={logOut}>
+                Log out
+              </button>
+            </li>
+          ) : (
+            <li>
+              <Link href="/login">Login</Link>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </div>
   );
 };
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import Viewer from "./Viewer";
 import router from "next/router";
-
 const orderValidator = z
   .object({
     sugarLevelId: z.number().positive(),
@@ -145,132 +144,135 @@ const OrderForm = () => {
         <Viewer order={order} />
       </div>
       <form className="order-form" onSubmit={handleFormSubmit}>
-        <div className="option-block">
-          <div className="option-choices">
-            {showButtons1 && (
-              <>
-                {/* Teas */}
-                <label>Tea choices</label>
-                {options.teas.map((tea) => (
-                  <button
-                    key={tea.id}
-                    type="button"
-                    className="tea-button"
-                    onClick={() => {
-                      setOrder({ ...order, teaId: tea.id });
-                    }}
-                  >
-                    <h4>{tea.name}</h4>
-                    <h4> {tea.price} €</h4>
-                  </button>
-                ))}
+        <div className="tea-milk-button">
+          {showButtons1 && (
+            <>
+              {/* Teas */}
+              <label className="label">Tea choices</label>
+              {options.teas.map((tea) => (
+                <button
+                  key={tea.id}
+                  type="button"
+                  className="button"
+                  onClick={() => {
+                    setOrder({ ...order, teaId: tea.id });
+                  }}
+                >
+                  <h4>{tea.name}</h4>
+                  <h4> {tea.price} €</h4>
+                </button>
+              ))}
 
-                {/* Milk */}
-                <label>Milk choices</label>
-                {options.milk.map((milk) => (
-                  <button
-                    key={milk.id}
-                    type="button"
-                    className="milk-button"
-                    onClick={() => {
-                      setOrder({ ...order, milkId: milk.id });
-                    }}
-                  >
-                    <h4>{milk.name}</h4>
-                    <h4> {milk.price} €</h4>
-                  </button>
-                ))}
-                <button onClick={showNextButtons}>Next</button>
-              </>
-            )}
-
-            {showButtons2 && (
-              <>
-                {/* Flavors */}
-                <label>Flavor choices</label>
-                {options.flavors.map((flavor) => (
-                  <button
-                    key={flavor.id}
-                    type="button"
-                    className="flavor-button"
-                    onClick={() => {
-                      setOrder({ ...order, flavorId: flavor.id });
-                    }}
-                  >
-                    {flavor.name}
-                  </button>
-                ))}
-
-                {/* Toppings */}
-                <label>Topping choices</label>
-                {options.toppings.map((topping) => (
-                  <button
-                    key={topping.id}
-                    type="button"
-                    className="topping-button"
-                    onClick={() => {
-                      setOrder({ ...order, toppingId: topping.id });
-                    }}
-                  >
-                    {topping.name}
-                  </button>
-                ))}
-                <button onClick={showFinalButtons}>Next</button>
-              </>
-            )}
-
-            {showButtons3 && (
-              <>
-                {/* IceLevels */}
-                <label>Ice Level</label>
-                {options.iceLevels.map((iceLvl) => (
-                  <button
-                    key={iceLvl.id}
-                    type="button"
-                    className="ice-button"
-                    onClick={() => {
-                      setOrder({ ...order, iceLevelId: iceLvl.id });
-                    }}
-                  >
-                    {iceLvl.name}
-                  </button>
-                ))}
-
-                {/* SugarLevels */}
-                <label>Sugar Level</label>
-                {options.sugarLevels.map((sugarLvl) => (
-                  <button
-                    key={sugarLvl.id}
-                    type="button"
-                    className="sugar-button"
-                    onClick={() => {
-                      setOrder({ ...order, sugarLevelId: sugarLvl.id });
-                    }}
-                  >
-                    {sugarLvl.name}
-                  </button>
-                ))}
-
-                {/* Cups */}
-                <label>Cup choices</label>
-                {options.cups.map((cup) => (
-                  <button
-                    key={cup.id}
-                    type="button"
-                    className="cup-button"
-                    onClick={() => {
-                      setOrder({ ...order, cupId: cup.id });
-                    }}
-                  >
-                    <h4>{cup.name}</h4>
-                    <h4>{cup.price} €</h4>
-                  </button>
-                ))}
-                <button type="submit">Submit</button>
-              </>
-            )}
-          </div>
+              {/* Milk */}
+              <label className="label">Milk choices</label>
+              {options.milk.map((milk) => (
+                <button
+                  key={milk.id}
+                  type="button"
+                  className="button"
+                  onClick={() => {
+                    setOrder({ ...order, milkId: milk.id });
+                  }}
+                >
+                  <h4>{milk.name}</h4>
+                  <h4> {milk.price} €</h4>
+                </button>
+              ))}
+              <button className="next-button" onClick={showNextButtons}>
+                Next
+              </button>
+            </>
+          )}
         </div>
+        {showButtons2 && (
+          <>
+            {/* Flavors */}
+            <label className="label">Flavor choices</label>
+            {options.flavors.map((flavor) => (
+              <button
+                key={flavor.id}
+                type="button"
+                className="button"
+                onClick={() => {
+                  setOrder({ ...order, flavorId: flavor.id });
+                }}
+              >
+                {flavor.name}
+              </button>
+            ))}
+
+            {/* Toppings */}
+            <label className="label">Topping choices</label>
+            {options.toppings.map((topping) => (
+              <button
+                key={topping.id}
+                type="button"
+                className="button"
+                onClick={() => {
+                  setOrder({ ...order, toppingId: topping.id });
+                }}
+              >
+                {topping.name}
+              </button>
+            ))}
+            <button className="next-button" onClick={showFinalButtons}>
+              Next
+            </button>
+          </>
+        )}
+
+        {showButtons3 && (
+          <>
+            {/* IceLevels */}
+            <label className="label">Ice Level</label>
+            {options.iceLevels.map((iceLvl) => (
+              <button
+                key={iceLvl.id}
+                type="button"
+                className="button"
+                onClick={() => {
+                  setOrder({ ...order, iceLevelId: iceLvl.id });
+                }}
+              >
+                {iceLvl.name}
+              </button>
+            ))}
+
+            {/* SugarLevels */}
+            <label className="label">Sugar Level</label>
+            {options.sugarLevels.map((sugarLvl) => (
+              <button
+                key={sugarLvl.id}
+                type="button"
+                className="button"
+                onClick={() => {
+                  setOrder({ ...order, sugarLevelId: sugarLvl.id });
+                }}
+              >
+                {sugarLvl.name}
+              </button>
+            ))}
+
+            {/* Cups */}
+            <label className="label">Cup choices</label>
+            {options.cups.map((cup) => (
+              <button
+                key={cup.id}
+                type="button"
+                className="button"
+                onClick={() => {
+                  setOrder({ ...order, cupId: cup.id });
+                }}
+              >
+                {cup.name}
+                {cup.price} €
+              </button>
+            ))}
+            <button type="submit">Submit</button>
+          </>
+        )}
+        {/* </div>
+        </div> */}
       </form>
     </main>
   );

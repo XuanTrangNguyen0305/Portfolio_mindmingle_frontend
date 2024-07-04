@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <div>
       <Layout>
-        <h1>Trang's boba shop</h1>
         <OrderForm />
       </Layout>
     </div>
