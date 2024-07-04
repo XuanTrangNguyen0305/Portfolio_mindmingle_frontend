@@ -25,6 +25,11 @@ const Navbar = () => {
               Home
             </Link>
           </li>
+          <li>
+            <Link className="home" href="/">
+              About Us
+            </Link>
+          </li>
           {!isLoggedIn && (
             <li>
               <Link href="/register">Register</Link>
