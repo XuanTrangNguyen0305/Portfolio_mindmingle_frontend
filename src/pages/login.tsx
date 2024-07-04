@@ -27,7 +27,6 @@ const UserLoginPage = () => {
     console.log(event.currentTarget);
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
-
     console.log("Data", data);
 
     // 2. Send the form data to our API
@@ -43,8 +42,8 @@ const UserLoginPage = () => {
     console.log(json);
     if (json.token) {
       localStorage.setItem("token", json.token);
-      router.push("/");
       alert("You are logged in");
+      router.push("/orders");
     } else {
       alert("Username or password is wrong");
     }

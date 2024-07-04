@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
-import { useEffect, useState } from "react";
+import router from "next/router";
+import { useCallback, useEffect, useState } from "react";
 
 interface Order {
   id: number;
@@ -35,27 +36,37 @@ interface Order {
 
 const OrderPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [token, setToken] = useState<string | null>(null);
+  const getOrdersFromApi = useCallback(async () => {
+    if (token === null) {
+      return;
+    }
+    const response = await fetch("http://localhost:3001/orders", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const itemData = await response.json();
+    setOrders(itemData);
+  }, [token]);
 
   useEffect(() => {
-    const getOrdersFromApi = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/orders");
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Fetch data:", data);
-        setOrders(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    const tokenFromStorage = localStorage.getItem("token");
+    if (tokenFromStorage === null) {
+      console.log(" Login to see your orders ");
+      router.push("/login");
+      alert("Please log in to view your orders");
+      return;
+    }
+    setToken(tokenFromStorage);
 
     getOrdersFromApi();
-  }, []);
+  }, [getOrdersFromApi, router]);
 
+  if (orders === null) {
+    return <p>loading...</p>;
+  }
   const OrderList = ({ order }: { order: Order }) => {
     const { id, cup, iceLevel, sugarLevel, size, flavor, tea, milk, topping } =
       order;

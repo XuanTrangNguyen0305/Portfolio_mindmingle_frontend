@@ -1,5 +1,7 @@
 import {
+  Backdrop,
   Box,
+  ContactShadows,
   // CameraControls,
   Environment,
   OrbitControls,
@@ -83,9 +85,8 @@ const Viewer = ({ order }: ViewerProps) => {
       {/* <ViewCup cupId={order.cupId} /> */}
       <Canvas>
         <OrbitControls />
-
         <Stage>
-          <Environment preset="sunset" background={true} />
+          <ContactShadows scale={10} blur={3} opacity={0.25} far={10} />
           <ViewCup cupId={order.cupId} />
           {/* <ViewIceLevel iceLevelId={order.iceLevelId} /> */}
           <ViewToppings toppingId={order.toppingId} />

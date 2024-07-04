@@ -15,12 +15,15 @@ type GLTFResult = GLTF & {
 };
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes } = useGLTF("/3D/boba.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/3D/boba.glb") as GLTFResult;
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Boba.geometry} rotation={[Math.PI / 2, 0, 0]}>
-        <meshLambertMaterial color="black" />
-      </mesh>
+      <mesh
+        geometry={nodes.Boba.geometry}
+        material={nodes.Boba.material}
+        position={[0.241, 0, 0]}
+        rotation={[Math.PI / 2, 0, 0]}
+      />
     </group>
   );
 }

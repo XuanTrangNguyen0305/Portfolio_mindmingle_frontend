@@ -1,3 +1,10 @@
+.body {
+  background-image: url("../image/background.jpg");
+}
+.order-viewer {
+  display: flex;
+  flex-direction: column;
+}
 .editor {
   display: flex;
 
@@ -5,16 +12,13 @@
   justify-content: space-between;
   /* align-items: stretch; */
 }
-
-.order-viewer {
-  border: 1px solid hotpink;
-  width: 40vw;
-  padding: 2rem;
-}
-
 .order-form {
-  width: 40vw;
-  border: 2px solid hotpink;
+  display: grid;
+  grid-column: auto;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  align-items: center;
+  width: 70vw;
   padding: 2rem;
 }
 
@@ -33,7 +37,7 @@
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  width: 30%;
+  width: 70%;
 }
 
 .ice-button {
@@ -46,10 +50,11 @@
 .cup-button {
   display: flex;
   flex-direction: column;
+  width: 100px;
 }
 
 .canvas-box {
   border: 2px solid hotpink;
-  height: 400px;
-  width: 400px;
+  height: 700px;
+  width: 700px;
 }
