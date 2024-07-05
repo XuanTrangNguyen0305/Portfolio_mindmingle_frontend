@@ -22,7 +22,7 @@ body {
 
 .order-form {
   flex: 1;
-  margin-right: 200px;
+  margin-right: 50px;
 }
 .canvas {
   margin-left: 50px;
@@ -52,7 +52,7 @@ body {
   cursor: pointer;
   border-radius: 8px; /* Rounded corners */
   width: 200px;
-  font-size: 1.5rem; /* Larger font size */
+  font-size: larger;
   font-weight: bold; /* Bold text */
   text-transform: uppercase; /* Uppercase text */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
@@ -130,7 +130,8 @@ button[type="submit"] {
 
 input[type="submit"]:hover,
 button[type="submit"]:hover {
-  background-color: #0e042b;
+  background-color: #4c3886;
+  color: white;
 }
 
 /* styles.css or Navbar.module.css */
@@ -139,7 +140,7 @@ button[type="submit"]:hover {
   align-items: center;
   padding: 1rem;
   color: #fff;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   font-family: Tahoma;
   padding: 0;
   margin-top: -30px;
@@ -147,7 +148,7 @@ button[type="submit"]:hover {
 }
 
 .nav-bar {
-  margin-left: 940px;
+  margin-left: 600px;
   padding: 0;
 }
 .nav-bar-logo img {
@@ -173,7 +174,7 @@ button[type="submit"]:hover {
   text-decoration: none;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s ease;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
   position: relative; /* Ensures the positioning context for pseudo-elements */
   -webkit-text-stroke: 1.5px black;

@@ -41,7 +41,7 @@ const OrderPage = () => {
     if (token === null) {
       return;
     }
-    const response = await fetch("http://localhost:3001/orders", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

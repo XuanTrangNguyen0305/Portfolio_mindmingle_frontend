@@ -31,7 +31,7 @@ const UserLoginPage = () => {
     console.log("Data", data);
 
     // 2. Send the form data to our API
-    const result = await fetch("http://localhost:3001/login", {
+    const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

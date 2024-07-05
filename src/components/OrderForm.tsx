@@ -60,7 +60,9 @@ const OrderForm = () => {
   useEffect(() => {
     const getOptionsfromAPI = async () => {
       try {
-        const response = await fetch("http://localhost:3001/options");
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/options`
+        );
         const data = await response.json();
         console.log("Fetched data:", data);
         const validated = OptionValidator.safeParse(data);
@@ -102,14 +104,17 @@ const OrderForm = () => {
 
       console.log("Data", data);
 
-      const response = await fetch("http://localhost:3001/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(validated.data),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(validated.data),
+        }
+      );
       const json = await response.json();
       console.log(json);
       router.push("/orders");
