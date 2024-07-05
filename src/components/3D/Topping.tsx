@@ -6,7 +6,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-
+import { MeshPhongMaterial } from "three";
 type GLTFResult = GLTF & {
   nodes: {
     Boba: THREE.Mesh;
@@ -20,10 +20,11 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
     <group {...props} dispose={null}>
       <mesh
         geometry={nodes.Boba.geometry}
-        material={nodes.Boba.material}
         position={[0.241, 0, 0]}
         rotation={[Math.PI / 2, 0, 0]}
-      />
+      >
+        <meshPhongMaterial color={"yellow"} />
+      </mesh>
     </group>
   );
 }
