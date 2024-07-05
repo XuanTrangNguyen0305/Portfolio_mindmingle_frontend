@@ -21,14 +21,10 @@ const Navbar = () => {
       <nav className="nav-bar">
         <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
           <li>
-            <Link className="home" href="/">
-              Home
-            </Link>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <Link className="home" href="/">
-              About Us
-            </Link>
+            <Link href="/">About Us</Link>
           </li>
           {!isLoggedIn && (
             <li>
@@ -36,11 +32,16 @@ const Navbar = () => {
             </li>
           )}
           {isLoggedIn ? (
-            <li>
-              <button className="logout" onClick={logOut}>
-                Log out
-              </button>
-            </li>
+            <>
+              <li>
+                <Link href="/orders">Your Orders</Link>
+              </li>
+              <li>
+                <button className="logout" onClick={logOut}>
+                  Log Out
+                </button>
+              </li>
+            </>
           ) : (
             <li>
               <Link href="/login">Login</Link>

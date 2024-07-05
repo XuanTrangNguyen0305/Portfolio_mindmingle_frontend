@@ -52,7 +52,7 @@ const UserLoginPage = () => {
 
   return (
     <Layout>
-      <div>
+      <div className="login">
         <h1>Login</h1>
         <form onSubmit={onSubmitTheForm} className="form__login">
           <label htmlFor="username">Username</label>

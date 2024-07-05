@@ -54,7 +54,7 @@ const OrderPage = () => {
   useEffect(() => {
     const tokenFromStorage = localStorage.getItem("token");
     if (tokenFromStorage === null) {
-      console.log(" Login to see your orders ");
+      console.log("Login to see your orders");
       router.push("/login");
       alert("Please log in to view your orders");
       return;
@@ -65,19 +65,20 @@ const OrderPage = () => {
   }, [getOrdersFromApi, router]);
 
   if (orders === null) {
-    return <p>loading...</p>;
+    return <p className="loading">loading...</p>;
   }
+
   const OrderList = ({ order }: { order: Order }) => {
     const { id, cup, iceLevel, sugarLevel, size, flavor, tea, milk, topping } =
       order;
 
     return (
-      <div>
+      <div className="order">
         <h3>Order ID: {id}</h3>
 
         <h4>Tea</h4>
         <p>{tea.name}</p>
-        <p>{tea.price}€</p>
+        <p className="price">{tea.price}€</p>
 
         <h4>Milk</h4>
         <p>{milk.name}</p>
@@ -93,11 +94,11 @@ const OrderPage = () => {
 
         <h4>Size</h4>
         <p>{size.name}</p>
-        <p>{size.price}€</p>
+        <p className="price">{size.price}€</p>
 
         <h4>Cup</h4>
         <p>{cup.name}</p>
-        <p>{cup.price}€</p>
+        <p className="price">{cup.price}€</p>
 
         <h4>Topping</h4>
         <p>{topping.name}</p>
@@ -108,18 +109,15 @@ const OrderPage = () => {
 
   return (
     <Layout>
-      <h2>Welcome to your orders</h2>
-
-      <div>
-        {orders
-          .sort((a, b) => {
-            if (a.id.valueOf() < b.id.valueOf()) return 1;
-            if (a.id.valueOf() > b.id.valueOf()) return -1;
-            return 0;
-          })
-          .map((order) => (
-            <OrderList key={order.id} order={order} />
-          ))}
+      <div className="orders-container">
+        <h2>Welcome to your orders</h2>
+        <div>
+          {orders
+            .sort((a, b) => (a.id < b.id ? 1 : -1))
+            .map((order) => (
+              <OrderList key={order.id} order={order} />
+            ))}
+        </div>
       </div>
     </Layout>
   );

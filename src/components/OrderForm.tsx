@@ -197,7 +197,7 @@ const OrderForm = () => {
                   setOrder({ ...order, flavorId: flavor.id });
                 }}
               >
-                {flavor.name}
+                <h4>{flavor.name}</h4>
               </button>
             ))}
 
@@ -212,7 +212,7 @@ const OrderForm = () => {
                   setOrder({ ...order, toppingId: topping.id });
                 }}
               >
-                {topping.name}
+                <h4>{topping.name}</h4>
               </button>
             ))}
             <button className="next-button" onClick={showFinalButtons}>
@@ -234,7 +234,7 @@ const OrderForm = () => {
                   setOrder({ ...order, iceLevelId: iceLvl.id });
                 }}
               >
-                {iceLvl.name}
+                <h4>{iceLvl.name}</h4>
               </button>
             ))}
 
@@ -249,7 +249,7 @@ const OrderForm = () => {
                   setOrder({ ...order, sugarLevelId: sugarLvl.id });
                 }}
               >
-                {sugarLvl.name}
+                <h4>{sugarLvl.name}</h4>
               </button>
             ))}
 
@@ -264,8 +264,8 @@ const OrderForm = () => {
                   setOrder({ ...order, cupId: cup.id });
                 }}
               >
-                {cup.name}
-                {cup.price} €
+                <h4>{cup.name}</h4>
+                <h4>{cup.price} €</h4>
               </button>
             ))}
             <button type="submit">Submit</button>
