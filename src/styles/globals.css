@@ -28,7 +28,7 @@ body {
   margin-left: 50px;
 }
 .canvas-box {
-  background: linear-gradient(135deg, #a881db, #5e7db4);
+  /* background: linear-gradient(135deg, #a881db, #5e7db4); */
   height: 700px;
   width: 700px;
   margin-left: 100px;

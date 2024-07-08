@@ -10,7 +10,7 @@ import {
 import { Order } from "./OrderForm";
 import { Canvas } from "@react-three/fiber";
 import Cup from "./3D/Cup";
-import Topping from "./3D/Topping";
+import Boba from "./3D/Boba";
 
 interface ViewerProps {
   order: Order;
@@ -75,7 +75,7 @@ const ViewCup = (props: ViewCupProps) => {
 
 const ViewToppings = (props: ViewToppingProps) => {
   if (props.toppingId === 1) {
-    return <Topping />;
+    return <Boba />;
   }
 };
 
