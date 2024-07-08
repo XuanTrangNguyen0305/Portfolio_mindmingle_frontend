@@ -4,7 +4,10 @@ import {
   ContactShadows,
   // CameraControls,
   Environment,
+  Grid,
   OrbitControls,
+  TransformControls,
+  Resize,
   Stage,
 } from "@react-three/drei";
 import { Order } from "./OrderForm";
@@ -84,12 +87,28 @@ const Viewer = ({ order }: ViewerProps) => {
     <div className="canvas-box">
       {/* <ViewCup cupId={order.cupId} /> */}
       <Canvas>
-        <OrbitControls />
-        <Stage>
-          <ContactShadows scale={10} blur={3} opacity={0.25} far={10} />
-          <ViewCup cupId={order.cupId} />
-          {/* <ViewIceLevel iceLevelId={order.iceLevelId} /> */}
-          <ViewToppings toppingId={order.toppingId} />
+        <OrbitControls
+          maxDistance={1.5}
+          minDistance={0.5}
+          enableDamping
+          enablePan={false}
+          autoRotate
+        />
+        <Stage
+          intensity={1.8}
+          environment={{
+            background: false,
+            preset: "studio",
+            ground: true,
+          }}
+        >
+          <Resize>
+            <group>
+              <ViewCup cupId={order.cupId} />
+              {/* <ViewIceLevel iceLevelId={order.iceLevelId} /> */}
+              <ViewToppings toppingId={order.toppingId} />
+            </group>
+          </Resize>
         </Stage>
       </Canvas>
     </div>
