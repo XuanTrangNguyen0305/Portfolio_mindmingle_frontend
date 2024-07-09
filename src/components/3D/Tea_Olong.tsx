@@ -32,7 +32,7 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
           opacity={0.8}
           transmission={0.6}
           ior={1.33}
-          color="coral"
+          color="brown"
         ></meshPhysicalMaterial>
       </mesh>
     </group>
