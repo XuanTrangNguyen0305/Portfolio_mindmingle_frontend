@@ -13,8 +13,18 @@ import {
 import { Order } from "./OrderForm";
 import { Canvas } from "@react-three/fiber";
 import Cup from "./3D/Cup";
-import Boba from "./3D/Boba";
-
+import Boba from "./3D/Tea";
+import Milk from "./3D/Milk_Regular";
+import Tea from "./3D/Tea";
+import RegularMilk from "./3D/Milk_Regular";
+import Extra_Ice from "./3D/Ice_Extra";
+import Ice_Less from "./3D/Ice_Less";
+import Ice_Regular from "./3D/Ice_Regular";
+import Ice_Extra from "./3D/Ice_Extra";
+import Milk_Regular from "./3D/Milk_Regular";
+import Milk_Almond from "./3D/Milk_Almond";
+import Mini_Mochi from "./3D/Mini_Mochi";
+import Star_Boba from "./3D/Star_Boba";
 interface ViewerProps {
   order: Order;
 }
@@ -29,33 +39,24 @@ interface ViewToppingProps {
 interface ViewCupProps {
   cupId: number;
 }
+interface ViewMilkProps {
+  milkId: number;
+}
+interface ViewTeaProps {
+  teaId: number;
+}
 const ViewIceLevel = (props: ViewIceLevelProps) => {
   if (props.iceLevelId === 1) {
     return null;
   }
   if (props.iceLevelId === 2) {
-    return (
-      <Box scale={1}>
-        <meshLambertMaterial color={"blue"} />
-      </Box>
-    );
+    return <Ice_Less />;
   }
   if (props.iceLevelId === 3) {
-    return (
-      <group>
-        <Box material-color="blue" position={[-1, 0, 0]} />
-        <Box material-color="blue" position={[1, 0, 0]} />
-      </group>
-    );
+    return <Ice_Regular />;
   }
   if (props.iceLevelId === 4) {
-    return (
-      <group>
-        <Box material-color="blue" position={[-1, 0, 0]} />
-        <Box material-color="blue" position={[1, 0, 0]} />
-        <Box material-color="blue" position={[0, 0, 2]} />
-      </group>
-    );
+    return <Ice_Extra />;
   }
   console.log("INVALID ICE LEVEL");
   return null;
@@ -75,10 +76,31 @@ const ViewCup = (props: ViewCupProps) => {
     return <Cup />;
   }
 };
-
+const ViewMilk = (props: ViewMilkProps) => {
+  if (props.milkId === 1) {
+    return null;
+  }
+  if (props.milkId === 2) {
+    return <Milk_Regular />;
+  }
+  if (props.milkId === 3) {
+    return <Milk_Almond />;
+  }
+  if (props.milkId === 4) {
+    return <Milk />;
+  }
+};
+const ViewTea = (props: ViewTeaProps) => {
+  if (props.teaId === 1) {
+    return <Tea />;
+  }
+};
 const ViewToppings = (props: ViewToppingProps) => {
   if (props.toppingId === 1) {
-    return <Boba />;
+    return <Star_Boba />;
+  }
+  if (props.toppingId === 4) {
+    return <Mini_Mochi />;
   }
 };
 
@@ -105,8 +127,10 @@ const Viewer = ({ order }: ViewerProps) => {
           <Resize>
             <group>
               <ViewCup cupId={order.cupId} />
-              {/* <ViewIceLevel iceLevelId={order.iceLevelId} /> */}
               <ViewToppings toppingId={order.toppingId} />
+              <ViewMilk milkId={order.milkId} />
+              <ViewTea teaId={order.teaId} />
+              <ViewIceLevel iceLevelId={order.iceLevelId} />
             </group>
           </Resize>
         </Stage>
