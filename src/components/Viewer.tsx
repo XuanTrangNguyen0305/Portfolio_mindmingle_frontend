@@ -135,7 +135,7 @@ const Viewer = ({ order }: ViewerProps) => {
           autoRotate
         />
         <Stage
-          intensity={1.8}
+          intensity={6}
           environment={{
             background: false,
             preset: "studio",
@@ -145,9 +145,11 @@ const Viewer = ({ order }: ViewerProps) => {
           <Resize>
             <group>
               <ViewCup cupId={order.cupId} />
+              <ViewTea teaId={order.teaId} />
+
               <ViewToppings toppingId={order.toppingId} />
               <ViewMilk milkId={order.milkId} />
-              <ViewTea teaId={order.teaId} />
+
               <ViewIceLevel iceLevelId={order.iceLevelId} />
             </group>
           </Resize>

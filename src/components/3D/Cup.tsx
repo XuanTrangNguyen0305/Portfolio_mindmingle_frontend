@@ -14,23 +14,15 @@ type GLTFResult = GLTF & {
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("./3D/Cup2.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Cup.geometry}
-        rotation={[Math.PI / 2, 0, 0]}
-        userData={{ name: "Cup" }}
-      >
-        <meshPhysicalMaterial
+    <group {...props} dispose={null} renderOrder={99}>
+      <mesh geometry={nodes.Cup.geometry} rotation={[Math.PI / 2, 0, 0]}>
+        <meshStandardMaterial
           transparent
-          opacity={0.4}
-          transmission={0.6}
-          thickness={0.8}
-          ior={1}
-          roughness={0}
-          clearcoat={0.6}
-          color={"#a7a7a7"}
+          opacity={0.35}
+          side={THREE.BackSide}
+          color={"#ffffff"}
+          roughness={1}
         />
-        {/* <Outlines /> */}
       </mesh>
     </group>
   );
