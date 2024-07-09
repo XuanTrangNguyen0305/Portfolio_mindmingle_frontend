@@ -51,12 +51,14 @@ const OrderForm = () => {
     toppingId: 1,
   });
 
+  const [ClickedTeaId, setClickedTeaId] = useState<Number>();
   const [options, setOptions] = useState<Options>();
   const [token, setToken] = useState<string | null>(null);
   const [showButtons1, setShowButtons1] = useState(true);
   const [showButtons2, setShowButtons2] = useState(false);
   const [showButtons3, setShowButtons3] = useState(false);
-
+  const [backButton1, setBackbutton1] = useState(true);
+  const [backButton2, setBackbutton2] = useState(true);
   useEffect(() => {
     const getOptionsfromAPI = async () => {
       try {
@@ -133,10 +135,21 @@ const OrderForm = () => {
     setShowButtons1(false);
     setShowButtons2(true);
   };
+  const showBackButton = () => {
+    setShowButtons1(true);
+    setBackbutton1(false);
+    setShowButtons2(false);
+  };
 
   const showFinalButtons = () => {
     setShowButtons2(false);
     setShowButtons3(true);
+  };
+
+  const showBackButton2 = () => {
+    setShowButtons2(true);
+    setBackbutton2(false);
+    setShowButtons3(false);
   };
 
   if (!options) {
@@ -159,8 +172,13 @@ const OrderForm = () => {
                   key={tea.id}
                   type="button"
                   className="button"
+                  style={{
+                    backgroundColor: ClickedTeaId === tea.id ? "blue" : "gray",
+                    color: "white",
+                  }}
                   onClick={() => {
                     setOrder({ ...order, teaId: tea.id });
+                    setClickedTeaId(tea.id);
                   }}
                 >
                   <h4>{tea.name}</h4>
@@ -223,6 +241,14 @@ const OrderForm = () => {
             <button className="next-button" onClick={showFinalButtons}>
               Next
             </button>
+
+            <button
+              type="button"
+              className="back-button"
+              onClick={showBackButton}
+            >
+              Back
+            </button>
           </>
         )}
 
@@ -274,6 +300,13 @@ const OrderForm = () => {
               </button>
             ))}
             <button type="submit">Submit</button>
+            <button
+              type="button"
+              className="back-button"
+              onClick={showBackButton2}
+            >
+              Back
+            </button>
           </>
         )}
         {/* </div>
