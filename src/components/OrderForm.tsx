@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import Viewer from "./Viewer";
 import router from "next/router";
-import PopupMessage from "../components/PopupMessage"; // Adjust the path based on your project structure
 
 const orderValidator = z
   .object({
@@ -53,15 +52,21 @@ const OrderForm = () => {
     toppingId: 1,
   });
 
-  const [ClickedTeaId, setClickedTeaId] = useState<number | null>(null); // Update type to number | null
-  const [options, setOptions] = useState<Options | null>(null); // Update type to Options | null
+  const [ClickedTeaId, setClickedTeaId] = useState<number | null>(null);
+  const [ClickedMilkId, setClickedMilkId] = useState<number | null>(null);
+  const [ClickedFlavorId, setClickedFlavorId] = useState<number | null>(null);
+  const [ClickedToppingId, setClickedToppingId] = useState<number | null>(null);
+  const [ClickedIceId, setClickedIceId] = useState<number | null>(null);
+  const [ClickedSugarId, setClickedSugarId] = useState<number | null>(null);
+  const [ClickedCupId, setClickedCupId] = useState<number | null>(null);
+  const [options, setOptions] = useState<Options | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [showButtons1, setShowButtons1] = useState(true);
   const [showButtons2, setShowButtons2] = useState(false);
   const [showButtons3, setShowButtons3] = useState(false);
   const [backButton1, setBackbutton1] = useState(true);
   const [backButton2, setBackbutton2] = useState(true);
-  const [showPopup, setShowPopup] = useState(false);
+  // const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const getOptionsfromAPI = async () => {
@@ -178,27 +183,19 @@ const OrderForm = () => {
                   type="button"
                   className="button"
                   style={{
-                    backgroundColor: ClickedTeaId === tea.id ? "blue" : "gray",
+                    backgroundColor:
+                      ClickedTeaId === tea.id ? "#ffde71" : "#8c7dd3",
                     color: "white",
                   }}
                   onClick={() => {
                     setOrder({ ...order, teaId: tea.id });
                     setClickedTeaId(tea.id);
-                    setShowPopup(true); // Show pop-up when tea is selected
                   }}
                 >
                   <h4>{tea.name}</h4>
                   <h4> {tea.price} €</h4>
                 </button>
               ))}
-              {/* Render pop-up message if showPopup is true */}
-              {showPopup && (
-                <PopupMessage
-                  message={`Tea added to order: ${
-                    options.teas.find((tea) => tea.id === ClickedTeaId)?.name
-                  }`}
-                />
-              )}
 
               {/* Milk */}
               <label className="label">Milk choices</label>
@@ -207,8 +204,14 @@ const OrderForm = () => {
                   key={milk.id}
                   type="button"
                   className="button"
+                  style={{
+                    backgroundColor:
+                      ClickedMilkId === milk.id ? "#ffde71" : "#8c7dd3",
+                    color: "white",
+                  }}
                   onClick={() => {
                     setOrder({ ...order, milkId: milk.id });
+                    setClickedMilkId(milk.id);
                   }}
                 >
                   <h4>{milk.name}</h4>
@@ -230,8 +233,14 @@ const OrderForm = () => {
                 key={flavor.id}
                 type="button"
                 className="button"
+                style={{
+                  backgroundColor:
+                    ClickedFlavorId === flavor.id ? "#ffde71" : "#8c7dd3",
+                  color: "white",
+                }}
                 onClick={() => {
                   setOrder({ ...order, flavorId: flavor.id });
+                  setClickedFlavorId(flavor.id);
                 }}
               >
                 <h4>{flavor.name}</h4>
@@ -245,8 +254,14 @@ const OrderForm = () => {
                 key={topping.id}
                 type="button"
                 className="button"
+                style={{
+                  backgroundColor:
+                    ClickedToppingId === topping.id ? "#ffde71" : "#8c7dd3",
+                  color: "white",
+                }}
                 onClick={() => {
                   setOrder({ ...order, toppingId: topping.id });
+                  setClickedToppingId(topping.id);
                 }}
               >
                 <h4>{topping.name}</h4>
@@ -275,8 +290,14 @@ const OrderForm = () => {
                 key={iceLvl.id}
                 type="button"
                 className="button"
+                style={{
+                  backgroundColor:
+                    ClickedIceId === iceLvl.id ? "#ffde71" : "#8c7dd3",
+                  color: "white",
+                }}
                 onClick={() => {
                   setOrder({ ...order, iceLevelId: iceLvl.id });
+                  setClickedIceId(iceLvl.id);
                 }}
               >
                 <h4>{iceLvl.name}</h4>
@@ -290,8 +311,14 @@ const OrderForm = () => {
                 key={sugarLvl.id}
                 type="button"
                 className="button"
+                style={{
+                  backgroundColor:
+                    ClickedSugarId === sugarLvl.id ? "#ffde71" : "#8c7dd3",
+                  color: "white",
+                }}
                 onClick={() => {
                   setOrder({ ...order, sugarLevelId: sugarLvl.id });
+                  setClickedSugarId(sugarLvl.id);
                 }}
               >
                 <h4>{sugarLvl.name}</h4>
@@ -305,8 +332,14 @@ const OrderForm = () => {
                 key={cup.id}
                 type="button"
                 className="button"
+                style={{
+                  backgroundColor:
+                    ClickedCupId === cup.id ? "#ffde71" : "#8c7dd3",
+                  color: "white",
+                }}
                 onClick={() => {
                   setOrder({ ...order, cupId: cup.id });
+                  setClickedCupId(cup.id);
                 }}
               >
                 <h4>{cup.name}</h4>

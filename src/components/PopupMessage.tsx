@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
-const PopupMessage = ({ message }) => {
-  const [showPopup, setShowPopup] = useState(true);
+// const PopupMessage = ({ message }) => {
+//   const [showPopup, setShowPopup] = useState(true);
 
-  // Automatically hide the pop-up after 2 seconds
-  setTimeout(() => {
-    setShowPopup(false);
-  }, 2000);
+//   // Automatically hide the pop-up after 2 seconds
+//   setTimeout(() => {
+//     setShowPopup(false);
+//   }, 2000);
 
-  return (
-    <div className={`popup ${showPopup ? "show" : ""}`}>
-      <p>{message}</p>
-    </div>
-  );
-};
+//   return (
+//     <div className={`popup ${showPopup ? "show" : ""}`}>
+//       <p>{message}</p>
+//     </div>
+//   );
+// };
 
-export default PopupMessage;
+// export default PopupMessage;
