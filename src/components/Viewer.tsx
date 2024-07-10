@@ -13,11 +13,7 @@ import {
 import { Order } from "./OrderForm";
 import { Canvas } from "@react-three/fiber";
 import Cup from "./3D/Cup";
-import Boba from "./3D/Tea_Black";
 import Milk from "./3D/Milk_Regular";
-import Tea from "./3D/Tea_Black";
-import RegularMilk from "./3D/Milk_Regular";
-import Extra_Ice from "./3D/Ice_Extra";
 import Ice_Less from "./3D/Ice_Less";
 import Ice_Regular from "./3D/Ice_Regular";
 import Ice_Extra from "./3D/Ice_Extra";
@@ -27,12 +23,12 @@ import Mini_Mochi from "./3D/Mini_Mochi";
 import Star_Boba from "./3D/Star_Boba";
 import Tea_Black from "./3D/Tea_Black";
 import Tea_Green from "./3D/Tea_Green";
-import Tea_Olong from "./3D/Tea_Olong";
-import Tea_Jasmine from "./3D/Tea_Jasmine";
+import Tea_Butterfly from "./3D/Tea_Butterfly";
+import Tea_Hibicus from "./3D/Tea_Hibicus";
 import Pudding from "./3D/Pudding";
-import Jumbo_Jelly from "./3D/Jumbo_Jelly";
 import Duck_Cup from "./3D/Duck_Cup";
 import Panda_Cup from "./3D/Panda_Cup";
+import Milk_Coconut from "./3D/Milk_Coconut";
 interface ViewerProps {
   order: Order;
 }
@@ -92,7 +88,7 @@ const ViewMilk = (props: ViewMilkProps) => {
     return <Milk_Almond />;
   }
   if (props.milkId === 4) {
-    return <Milk />;
+    return <Milk_Coconut />;
   }
 };
 const ViewTea = (props: ViewTeaProps) => {
@@ -103,10 +99,10 @@ const ViewTea = (props: ViewTeaProps) => {
     return <Tea_Green />;
   }
   if (props.teaId === 3) {
-    return <Tea_Olong />;
+    return <Tea_Butterfly />;
   }
   if (props.teaId === 4) {
-    return <Tea_Jasmine />;
+    return <Tea_Hibicus />;
   }
 };
 const ViewToppings = (props: ViewToppingProps) => {

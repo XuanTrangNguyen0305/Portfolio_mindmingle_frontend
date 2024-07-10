@@ -37,36 +37,72 @@ interface Order {
 const OrderPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [token, setToken] = useState<string | null>(null);
+
   const getOrdersFromApi = useCallback(async () => {
     if (token === null) {
       return;
     }
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const itemData = await response.json();
-    setOrders(itemData);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch orders");
+      }
+      const itemData = await response.json();
+      setOrders(itemData);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
   }, [token]);
 
   useEffect(() => {
     const tokenFromStorage = localStorage.getItem("token");
     if (tokenFromStorage === null) {
+      alert("Please log in to view your orders");
       console.log("Login to see your orders");
       router.push("/login");
-      alert("Please log in to view your orders");
       return;
     }
     setToken(tokenFromStorage);
 
     getOrdersFromApi();
-  }, [getOrdersFromApi, router]);
+  }, [getOrdersFromApi]);
 
-  if (orders === null) {
-    return <p className="loading">loading...</p>;
-  }
+  const removeOrder = async (id: number) => {
+    console.log(`Removing order with ID: ${id}`);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/orders/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to remove order");
+      }
+      // Update state locally after successful deletion
+      setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
+    } catch (error) {
+      console.error("Error removing order:", error);
+    }
+  };
+
+  const newTotal = (order: Order) => {
+    const teaPrice = order.tea?.price || 0;
+    const milkPrice = order.milk?.price || 0;
+    const sizePrice = order.size?.price || 0;
+    const cupPrice = order.cup?.price || 0;
+    return teaPrice + milkPrice + sizePrice + cupPrice;
+  };
 
   const OrderList = ({ order }: { order: Order }) => {
     const { id, cup, iceLevel, sugarLevel, size, flavor, tea, milk, topping } =
@@ -103,20 +139,24 @@ const OrderPage = () => {
         <h4>Topping</h4>
         <p>{topping.name}</p>
         <br />
+        <h3>Total price: {newTotal(order)} €</h3>
+        <button onClick={() => removeOrder(id)}>Remove</button>
       </div>
     );
   };
+
+  if (orders === null) {
+    return <p className="loading">loading...</p>;
+  }
 
   return (
     <Layout>
       <div className="orders-container">
         <h2>Welcome to your orders</h2>
         <div>
-          {orders
-            .sort((a, b) => (a.id < b.id ? 1 : -1))
-            .map((order) => (
-              <OrderList key={order.id} order={order} />
-            ))}
+          {orders.map((order) => (
+            <OrderList key={order.id} order={order} />
+          ))}
         </div>
       </div>
     </Layout>

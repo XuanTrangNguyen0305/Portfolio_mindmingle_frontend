@@ -30,7 +30,6 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
           clearcoat={0.6}
           color={"#a7a7a7"}
         />
-        {/* <Outlines /> */}
       </mesh>
     </group>
   );

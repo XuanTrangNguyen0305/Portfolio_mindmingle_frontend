@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import Viewer from "./Viewer";
 import router from "next/router";
+import PopupMessage from "../components/PopupMessage"; // Adjust the path based on your project structure
+
 const orderValidator = z
   .object({
     sugarLevelId: z.number().positive(),
@@ -51,14 +53,16 @@ const OrderForm = () => {
     toppingId: 1,
   });
 
-  const [ClickedTeaId, setClickedTeaId] = useState<Number>();
-  const [options, setOptions] = useState<Options>();
+  const [ClickedTeaId, setClickedTeaId] = useState<number | null>(null); // Update type to number | null
+  const [options, setOptions] = useState<Options | null>(null); // Update type to Options | null
   const [token, setToken] = useState<string | null>(null);
   const [showButtons1, setShowButtons1] = useState(true);
   const [showButtons2, setShowButtons2] = useState(false);
   const [showButtons3, setShowButtons3] = useState(false);
   const [backButton1, setBackbutton1] = useState(true);
   const [backButton2, setBackbutton2] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+
   useEffect(() => {
     const getOptionsfromAPI = async () => {
       try {
@@ -96,7 +100,7 @@ const OrderForm = () => {
     try {
       const validated = orderValidator.safeParse(order);
       if (!validated.success) {
-        console.log(validated.error.flatten);
+        console.log(validated.error.flatten());
         return;
       }
 
@@ -135,6 +139,7 @@ const OrderForm = () => {
     setShowButtons1(false);
     setShowButtons2(true);
   };
+
   const showBackButton = () => {
     setShowButtons1(true);
     setBackbutton1(false);
@@ -179,12 +184,21 @@ const OrderForm = () => {
                   onClick={() => {
                     setOrder({ ...order, teaId: tea.id });
                     setClickedTeaId(tea.id);
+                    setShowPopup(true); // Show pop-up when tea is selected
                   }}
                 >
                   <h4>{tea.name}</h4>
                   <h4> {tea.price} €</h4>
                 </button>
               ))}
+              {/* Render pop-up message if showPopup is true */}
+              {showPopup && (
+                <PopupMessage
+                  message={`Tea added to order: ${
+                    options.teas.find((tea) => tea.id === ClickedTeaId)?.name
+                  }`}
+                />
+              )}
 
               {/* Milk */}
               <label className="label">Milk choices</label>

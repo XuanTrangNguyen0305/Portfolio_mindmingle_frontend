@@ -22,7 +22,13 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         geometry={nodes.Less_Ice.geometry}
         material={nodes.Less_Ice.material}
         rotation={[Math.PI / 2, 0, 0]}
-      />
+      >
+        <meshPhysicalMaterial
+          // clearcoat={0.6}
+          color={"#1e90ff"}
+          roughness={0.2}
+        />
+      </mesh>
     </group>
   );
 }

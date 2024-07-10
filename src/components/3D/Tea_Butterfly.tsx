@@ -34,12 +34,12 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
       >
         <meshPhysicalMaterial
           transparent
-          opacity={0.3}
-          transmission={0.9}
-          ior={1.1}
-          color="#C5E3C5"
+          opacity={0.4}
+          transmission={0.6}
+          ior={1.33}
+          color="#800080"
         ></meshPhysicalMaterial>
-        <Outlines thickness={0.1} color={"#5A9168"} />
+        <Outlines thickness={0.1} color={"#436EEE"} />
       </mesh>
     </group>
   );
