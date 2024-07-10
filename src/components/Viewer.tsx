@@ -29,6 +29,7 @@ import Pudding from "./3D/Pudding";
 import Duck_Cup from "./3D/Duck_Cup";
 import Panda_Cup from "./3D/Panda_Cup";
 import Milk_Coconut from "./3D/Milk_Coconut";
+import Sugar_Extra from "./3D/Sugar_Extra";
 interface ViewerProps {
   order: Order;
 }
@@ -48,6 +49,9 @@ interface ViewMilkProps {
 }
 interface ViewTeaProps {
   teaId: number;
+}
+interface ViewSugarProps {
+  sugarLevelId: number;
 }
 const ViewIceLevel = (props: ViewIceLevelProps) => {
   if (props.iceLevelId === 1) {
@@ -117,6 +121,11 @@ const ViewToppings = (props: ViewToppingProps) => {
     return <Mini_Mochi />;
   }
 };
+const ViewSugarLevel = (props: ViewSugarProps) => {
+  if (props.sugarLevelId === 3) {
+    return <Sugar_Extra />;
+  }
+};
 
 const Viewer = ({ order }: ViewerProps) => {
   return (
@@ -145,6 +154,7 @@ const Viewer = ({ order }: ViewerProps) => {
               <ViewMilk milkId={order.milkId} />
               <ViewTea teaId={order.teaId} />
               <ViewIceLevel iceLevelId={order.iceLevelId} />
+              <ViewSugarLevel sugarLevelId={order.sugarLevelId} />
             </group>
           </Resize>
         </Stage>
