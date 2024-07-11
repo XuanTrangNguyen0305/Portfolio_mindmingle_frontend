@@ -202,7 +202,7 @@ const OrderForm = () => {
       </div>
       <div>
         <button type="button" onClick={random}>
-          Let the Universe choose
+          ✨Let the Universe decide✨
         </button>
       </div>
       <form className="order-form" onSubmit={handleFormSubmit}>
@@ -276,6 +276,7 @@ const OrderForm = () => {
             </>
           )}
         </div>
+
         {showButtons2 && (
           <>
             {/* Flavors */}

@@ -29,6 +29,8 @@ import Duck_Cup from "./3D/Duck_Cup";
 import Panda_Cup from "./3D/Panda_Cup";
 import Milk_Coconut from "./3D/Milk_Coconut";
 import Sugar_Extra from "./3D/Sugar_Extra";
+import Duck_Cup_1 from "./3D/Duck_Cup_1";
+import Duck_Cup_2 from "./3D/Duck_Cup_2";
 interface ViewerProps {
   order: Order;
 }
@@ -73,8 +75,14 @@ const ViewCup = (props: ViewCupProps) => {
     return <Cup />;
   }
   if (props.cupId === 3) {
-    return <Duck_Cup />;
+    return (
+      <group>
+        <Duck_Cup_1 />
+        <Duck_Cup_2 />
+      </group>
+    );
   }
+
   if (props.cupId === 2) {
     return <Panda_Cup />;
   }

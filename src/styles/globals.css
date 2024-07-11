@@ -321,7 +321,7 @@ button[type="submit"]:hover {
   color: #777;
 }
 
-/* user-login-styles.module.css */
+/* log in page  */
 .login {
   max-width: 400px;
   margin: 0 auto;
@@ -384,3 +384,4 @@ button[type="submit"]:hover {
   color: #777;
   margin-top: 1rem;
 }
+/* user-login-styles.module.css */
