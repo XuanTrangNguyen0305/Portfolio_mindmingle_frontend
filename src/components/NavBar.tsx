@@ -21,11 +21,11 @@ const Navbar = () => {
       <nav className="nav-bar">
         <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/home">Home</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/">About Us</Link>
-          </li>
+          </li> */}
           {!isLoggedIn && (
             <li>
               <Link href="/register">Register</Link>

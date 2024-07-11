@@ -64,6 +64,14 @@ const OrderForm = () => {
   const [hover, setHover] = useState(false);
 
   useEffect(() => {
+    const tokenFromStorage = localStorage.getItem("token");
+    if (tokenFromStorage === null) {
+      router.push("/");
+      return;
+    } else {
+      setToken(tokenFromStorage);
+    }
+
     const getOptionsfromAPI = async () => {
       try {
         const response = await fetch(
@@ -85,14 +93,6 @@ const OrderForm = () => {
     getOptionsfromAPI();
   }, []);
 
-  useEffect(() => {
-    const tokenFromStorage = localStorage.getItem("token");
-    if (tokenFromStorage === null) {
-      router.push("/");
-    } else {
-      setToken(tokenFromStorage);
-    }
-  }, []);
   const random = () => {
     if (options === null) {
       return;

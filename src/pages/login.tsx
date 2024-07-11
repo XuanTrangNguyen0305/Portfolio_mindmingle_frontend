@@ -44,7 +44,7 @@ const UserLoginPage = () => {
     if (json.token) {
       localStorage.setItem("token", json.token);
       alert("You are logged in");
-      router.push("/orders");
+      router.push("/home");
     } else {
       alert("Username or password is wrong");
     }
