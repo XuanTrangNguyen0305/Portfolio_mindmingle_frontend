@@ -213,7 +213,7 @@ const OrderForm = () => {
               <label className="label">Tea choices</label>
               <div className="button-block">
                 {options.teas.map((tea) => (
-                  <div className="button-row">
+                  <div key={tea.id} className="button-row">
                     <button
                       key={tea.id}
                       type="button"
