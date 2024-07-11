@@ -13,7 +13,6 @@ import {
 import { Order } from "./OrderForm";
 import { Canvas } from "@react-three/fiber";
 import Cup from "./3D/Cup";
-import Milk from "./3D/Milk_Regular";
 import Ice_Less from "./3D/Ice_Less";
 import Ice_Regular from "./3D/Ice_Regular";
 import Ice_Extra from "./3D/Ice_Extra";
@@ -37,7 +36,6 @@ interface ViewerProps {
 interface ViewIceLevelProps {
   iceLevelId: number;
 }
-
 interface ViewToppingProps {
   toppingId: number;
 }

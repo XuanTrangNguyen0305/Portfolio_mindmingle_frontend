@@ -99,14 +99,12 @@ const OrderPage = () => {
   const newTotal = (order: Order) => {
     const teaPrice = order.tea?.price || 0;
     const milkPrice = order.milk?.price || 0;
-    const sizePrice = order.size?.price || 0;
     const cupPrice = order.cup?.price || 0;
-    return teaPrice + milkPrice + sizePrice + cupPrice;
+    return teaPrice + milkPrice + cupPrice;
   };
 
   const OrderList = ({ order }: { order: Order }) => {
-    const { id, cup, iceLevel, sugarLevel, size, flavor, tea, milk, topping } =
-      order;
+    const { id, cup, iceLevel, sugarLevel, flavor, tea, milk, topping } = order;
 
     return (
       <div className="order">
@@ -127,10 +125,6 @@ const OrderPage = () => {
 
         <h4>Sugar Level</h4>
         <p>{sugarLevel.name}</p>
-
-        <h4>Size</h4>
-        <p>{size.name}</p>
-        <p className="price">{size.price}€</p>
 
         <h4>Cup</h4>
         <p>{cup.name}</p>

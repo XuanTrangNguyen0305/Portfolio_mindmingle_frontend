@@ -20,7 +20,7 @@ type GLTFResult = GLTF & {
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("./3D/Tea.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} renderOrder={1}>
       <mesh
         castShadow
         receiveShadow

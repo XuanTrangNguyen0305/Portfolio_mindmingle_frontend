@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import Viewer from "./Viewer";
 import router from "next/router";
-
+import Popup from "reactjs-popup";
 const orderValidator = z
   .object({
     sugarLevelId: z.number().positive(),
     iceLevelId: z.number().positive(),
     cupId: z.number().positive(),
-    sizeId: z.number().positive(),
     teaId: z.number().positive(),
     milkId: z.number().positive(),
     flavorId: z.number().positive(),
@@ -21,18 +20,22 @@ export type Order = z.infer<typeof orderValidator>;
 const OptionValidator = z.object({
   iceLevels: z.array(z.object({ id: z.number(), name: z.string() })),
   sugarLevels: z.array(z.object({ id: z.number(), name: z.string() })),
-  sizes: z.array(
-    z.object({ id: z.number(), name: z.string(), price: z.number() })
-  ),
   cups: z.array(
     z.object({ id: z.number(), name: z.string(), price: z.number() })
   ),
   toppings: z.array(
     z.object({ id: z.number(), name: z.string(), price: z.number() })
   ),
-  flavors: z.array(z.object({ id: z.number(), name: z.string() })),
+  flavors: z.array(
+    z.object({ id: z.number(), name: z.string(), description: z.string() })
+  ),
   teas: z.array(
-    z.object({ id: z.number(), name: z.string(), price: z.number() })
+    z.object({
+      id: z.number(),
+      name: z.string(),
+      price: z.number(),
+      description: z.string(),
+    })
   ),
   milk: z.array(
     z.object({ id: z.number(), name: z.string(), price: z.number() })
@@ -45,20 +48,12 @@ const OrderForm = () => {
     sugarLevelId: 1,
     iceLevelId: 1,
     cupId: 1,
-    sizeId: 1,
     teaId: 1,
     milkId: 1,
     flavorId: 1,
     toppingId: 1,
   });
 
-  const [ClickedTeaId, setClickedTeaId] = useState<number | null>(null);
-  const [ClickedMilkId, setClickedMilkId] = useState<number | null>(null);
-  const [ClickedFlavorId, setClickedFlavorId] = useState<number | null>(null);
-  const [ClickedToppingId, setClickedToppingId] = useState<number | null>(null);
-  const [ClickedIceId, setClickedIceId] = useState<number | null>(null);
-  const [ClickedSugarId, setClickedSugarId] = useState<number | null>(null);
-  const [ClickedCupId, setClickedCupId] = useState<number | null>(null);
   const [options, setOptions] = useState<Options | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [showButtons1, setShowButtons1] = useState(true);
@@ -66,7 +61,7 @@ const OrderForm = () => {
   const [showButtons3, setShowButtons3] = useState(false);
   const [backButton1, setBackbutton1] = useState(true);
   const [backButton2, setBackbutton2] = useState(true);
-  // const [showPopup, setShowPopup] = useState(false);
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     const getOptionsfromAPI = async () => {
@@ -98,7 +93,35 @@ const OrderForm = () => {
       setToken(tokenFromStorage);
     }
   }, []);
+  const random = () => {
+    if (options === null) {
+      return;
+    }
+    const storeRandomTea = Math.floor(Math.random() * options.teas.length);
+    const storeRandomMilk = Math.floor(Math.random() * options.milk.length);
+    const storeRandomFlavor = Math.floor(
+      Math.random() * options.flavors.length
+    );
+    const storeRandomTopping = Math.floor(
+      Math.random() * options.toppings.length
+    );
+    const storeRandomIce = Math.floor(Math.random() * options.iceLevels.length);
+    const storeRandomSugar = Math.floor(
+      Math.random() * options.sugarLevels.length
+    );
+    const storeRandomCup = Math.floor(Math.random() * options.cups.length);
 
+    console.log(options.teas[storeRandomTea]);
+    setOrder({
+      sugarLevelId: options.sugarLevels[storeRandomSugar].id,
+      iceLevelId: options.iceLevels[storeRandomIce].id,
+      cupId: options.cups[storeRandomCup].id,
+      teaId: options.teas[storeRandomTea].id,
+      milkId: options.milk[storeRandomMilk].id,
+      flavorId: options.flavors[storeRandomFlavor].id,
+      toppingId: options.toppings[storeRandomTopping].id,
+    });
+  };
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -161,7 +184,13 @@ const OrderForm = () => {
     setBackbutton2(false);
     setShowButtons3(false);
   };
-
+  const [open, setOpen] = useState(false);
+  const openModal = () => {
+    setOpen(true);
+  };
+  const closeModal = () => {
+    setOpen(false);
+  };
   if (!options) {
     return <p>Loading...</p>;
   }
@@ -171,31 +200,55 @@ const OrderForm = () => {
       <div className="order-viewer">
         <Viewer order={order} />
       </div>
+      <div>
+        <button type="button" onClick={random}>
+          Let the Universe choose
+        </button>
+      </div>
       <form className="order-form" onSubmit={handleFormSubmit}>
         <div className="tea-milk-button">
           {showButtons1 && (
             <>
               {/* Teas */}
               <label className="label">Tea choices</label>
-              {options.teas.map((tea) => (
-                <button
-                  key={tea.id}
-                  type="button"
-                  className="button"
-                  style={{
-                    backgroundColor:
-                      ClickedTeaId === tea.id ? "#ffde71" : "#8c7dd3",
-                    color: "white",
-                  }}
-                  onClick={() => {
-                    setOrder({ ...order, teaId: tea.id });
-                    setClickedTeaId(tea.id);
-                  }}
-                >
-                  <h4>{tea.name}</h4>
-                  <h4> {tea.price} €</h4>
-                </button>
-              ))}
+              <div className="button-block">
+                {options.teas.map((tea) => (
+                  <div className="button-row">
+                    <button
+                      key={tea.id}
+                      type="button"
+                      className={`boba-button ${
+                        order.teaId === tea.id && "active"
+                      }`}
+                      onClick={() => {
+                        setOrder({ ...order, teaId: tea.id });
+                      }}
+                    >
+                      <h4>{tea.name}</h4>
+                      <h4> {tea.price} €</h4>
+                    </button>
+                    <Popup
+                      trigger={
+                        <button type="button" className="info-button">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                          </svg>
+                        </button>
+                      }
+                      position="left center"
+                    >
+                      <p className="description"> {tea.description}</p>
+                    </Popup>
+                  </div>
+                ))}
+              </div>
 
               {/* Milk */}
               <label className="label">Milk choices</label>
@@ -203,15 +256,14 @@ const OrderForm = () => {
                 <button
                   key={milk.id}
                   type="button"
-                  className="button"
+                  className="boba-button"
                   style={{
                     backgroundColor:
-                      ClickedMilkId === milk.id ? "#ffde71" : "#8c7dd3",
+                      order.milkId === milk.id ? "#ffde71" : "#8c7dd3",
                     color: "white",
                   }}
                   onClick={() => {
                     setOrder({ ...order, milkId: milk.id });
-                    setClickedMilkId(milk.id);
                   }}
                 >
                   <h4>{milk.name}</h4>
@@ -232,18 +284,18 @@ const OrderForm = () => {
               <button
                 key={flavor.id}
                 type="button"
-                className="button"
+                className="boba-button"
                 style={{
                   backgroundColor:
-                    ClickedFlavorId === flavor.id ? "#ffde71" : "#8c7dd3",
+                    order.flavorId === flavor.id ? "#ffde71" : "#8c7dd3",
                   color: "white",
                 }}
                 onClick={() => {
                   setOrder({ ...order, flavorId: flavor.id });
-                  setClickedFlavorId(flavor.id);
                 }}
               >
                 <h4>{flavor.name}</h4>
+                <img src="https://img.icons8.com/?size=20&id=CWiCmUhQTh3E&format=png&color=000000" />
               </button>
             ))}
 
@@ -253,18 +305,18 @@ const OrderForm = () => {
               <button
                 key={topping.id}
                 type="button"
-                className="button"
+                className="boba-button"
                 style={{
                   backgroundColor:
-                    ClickedToppingId === topping.id ? "#ffde71" : "#8c7dd3",
+                    order.toppingId === topping.id ? "#ffde71" : "#8c7dd3",
                   color: "white",
                 }}
                 onClick={() => {
                   setOrder({ ...order, toppingId: topping.id });
-                  setClickedToppingId(topping.id);
                 }}
               >
                 <h4>{topping.name}</h4>
+                <img src="https://img.icons8.com/?size=20&id=CWiCmUhQTh3E&format=png&color=000000" />
               </button>
             ))}
             <button className="next-button" onClick={showFinalButtons}>
@@ -273,7 +325,7 @@ const OrderForm = () => {
 
             <button
               type="button"
-              className="back-button"
+              className="boba-button"
               onClick={showBackButton}
             >
               Back
@@ -292,12 +344,11 @@ const OrderForm = () => {
                 className="button"
                 style={{
                   backgroundColor:
-                    ClickedIceId === iceLvl.id ? "#ffde71" : "#8c7dd3",
+                    order.iceLevelId === iceLvl.id ? "#ffde71" : "#8c7dd3",
                   color: "white",
                 }}
                 onClick={() => {
                   setOrder({ ...order, iceLevelId: iceLvl.id });
-                  setClickedIceId(iceLvl.id);
                 }}
               >
                 <h4>{iceLvl.name}</h4>
@@ -313,12 +364,11 @@ const OrderForm = () => {
                 className="button"
                 style={{
                   backgroundColor:
-                    ClickedSugarId === sugarLvl.id ? "#ffde71" : "#8c7dd3",
+                    order.sugarLevelId === sugarLvl.id ? "#ffde71" : "#8c7dd3",
                   color: "white",
                 }}
                 onClick={() => {
                   setOrder({ ...order, sugarLevelId: sugarLvl.id });
-                  setClickedSugarId(sugarLvl.id);
                 }}
               >
                 <h4>{sugarLvl.name}</h4>
@@ -334,12 +384,11 @@ const OrderForm = () => {
                 className="button"
                 style={{
                   backgroundColor:
-                    ClickedCupId === cup.id ? "#ffde71" : "#8c7dd3",
+                    order.cupId === cup.id ? "#ffde71" : "#8c7dd3",
                   color: "white",
                 }}
                 onClick={() => {
                   setOrder({ ...order, cupId: cup.id });
-                  setClickedCupId(cup.id);
                 }}
               >
                 <h4>{cup.name}</h4>
