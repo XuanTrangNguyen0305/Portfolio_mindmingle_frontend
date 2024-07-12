@@ -9,29 +9,35 @@ import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Less_Ice: THREE.Mesh;
+    Flavor_Yuzu: THREE.Mesh;
   };
   materials: {};
 };
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("./3D/Less_Ice.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./3D/Flavor_Yuzu.glb") as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh
-        geometry={nodes.Less_Ice.geometry}
-        material={nodes.Less_Ice.material}
+        castShadow
+        receiveShadow
+        geometry={nodes.Flavor_Yuzu.geometry}
+        material={nodes.Flavor_Yuzu.material}
         rotation={[Math.PI / 2, 0, 0]}
       >
         <meshPhysicalMaterial
-          // clearcoat={0.6}
-          color={"#1e90ff"}
+          color={"#FECB2F"}
+          opacity={9}
+          transmission={0.6}
+          thickness={0.8}
+          ior={1}
           roughness={0.2}
+          clearcoat={0.6}
         />
-        <Outlines thickness={0.1} color={"#DBF1FD"} />
+        <Outlines thickness={0.1} color={"#FFA500"} />
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/Less_Ice.glb");
+useGLTF.preload("/Flavor_Yuzu.glb");

@@ -9,26 +9,33 @@ import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Jumbo_Jelly: THREE.Mesh;
+    Suagr_Regular: THREE.Mesh;
   };
-  materials: {
-    initialShadingGroup: THREE.MeshStandardMaterial;
-  };
+  materials: {};
 };
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("./3D/Jumbo_Jelly.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./3D/Suagr_Regular.glb") as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.Jumbo_Jelly.geometry}
-        material={materials.initialShadingGroup}
+        geometry={nodes.Suagr_Regular.geometry}
+        material={nodes.Suagr_Regular.material}
         rotation={[Math.PI / 2, 0, 0]}
-      />
+      >
+        {" "}
+        <meshPhysicalMaterial
+          color={"white"}
+          roughness={0.1}
+          thickness={0.2}
+          ior={9}
+          clearcoat={0.2}
+        />
+      </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/Jumbo_Jelly.glb");
+useGLTF.preload("/Suagr_Regular.glb");

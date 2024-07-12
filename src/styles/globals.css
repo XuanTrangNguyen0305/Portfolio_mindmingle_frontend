@@ -74,21 +74,22 @@ body {
 .info-button {
   cursor: pointer;
   transition: transform 0.2s; /* Smooth scaling */
-  display: block;
-  background-color: rgb(252, 150, 201);
-  color: white;
-  border: 2px solid #3b2e7a;
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  border: none;
   height: 40px;
   aspect-ratio: 1;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
+  border-radius: 100px;
+  background-color: transparent; /* Default background */
+  width: fit-content;
 }
 
 .info-button:hover {
-  opacity: 0.8;
   transform: scale(1.1); /* Slightly scale up on hover */
+  background-color: rgb(255, 167, 233);
 }
+
 .description {
   background-color: white;
 }
@@ -108,39 +109,31 @@ body {
   font-size: larger;
   font-weight: bold;
   text-transform: uppercase;
-  box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5),
-    0 0 25px rgba(255, 223, 113, 0.7); /* Glowing effect */
-  transition: background-color 0.3s ease, transform 0.2s ease,
-    box-shadow 0.3s ease;
-  position: relative; /* Necessary for ::before */
-}
-
-.universe-button::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 300%;
-  height: 300%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.3) 0%,
-    transparent 20%
-  );
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.5s;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Necessary for positioning */
 }
 
 .universe-button:hover {
   background-color: #ff69b4; /* Lighter shade on hover */
-  transform: scale(1.05);
-  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.9); /* Increased glow */
-  color: #fff; /* Keep text white */
+  animation: wiggle 0.3s ease forwards; /* Add wiggle animation */
 }
 
-.universe-button:hover::before {
-  transform: scale(1); /* Activate glowing effect */
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .tea-milk {
@@ -157,7 +150,7 @@ body {
   margin-bottom: 20px;
   margin-top: 20px;
   font-family: Tahoma;
-  font-size: larger;
+  font-size: 22px;
 }
 
 .boba-button {
@@ -192,7 +185,7 @@ body {
 
 .boba-button h4:last-child {
   margin-top: 0; /* Ensure no top margin for price */
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .active {
@@ -312,16 +305,16 @@ body {
 }
 .next-back {
   display: flex;
-  justify-content: space-between; /* Space out the buttons */
+  justify-content: space-between;
   margin-top: 20px;
 }
 .submit-back {
   display: flex;
-  justify-content: space-between; /* Space out the buttons */
+  justify-content: space-between;
   margin-top: 20px;
 }
 .submit-button {
-  background-color: #ffde71; /* Same background color */
+  background-color: #ffde71;
   width: 150px;
   border: solid black;
   color: #0a0603;
@@ -336,15 +329,15 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .submit-button:hover {
-  background-color: #ffde71; /* Same hover effect */
+  background-color: #ffde71;
   transform: scale(1.05);
 }
 /* Navbar.module.css */
 .nav-bar-logo {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the logo */
-  width: 100%; /* Take full width */
+  justify-content: center;
+  width: 100%;
   color: #fff;
   font-family: Tahoma;
   padding: 0;
@@ -356,16 +349,16 @@ body {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  position: absolute; /* Keep navbar at the top right */
-  right: 0; /* Align to the right */
-  top: 0; /* Align to the top */
+  position: absolute;
+  right: 0;
+  top: 0;
   margin-top: 70px;
   margin-right: 50px;
 }
 
 .nav-bar-logo img {
   transition: transform 0.3s ease;
-  margin-right: 20px; /* Space between logo and navbar */
+  margin-right: 20px;
 }
 
 .nav-bar-logo img:hover {
@@ -374,7 +367,7 @@ body {
 
 .nav-bar ul {
   display: flex;
-  gap: 2rem; /* Space between navbar items */
+  gap: 2rem;
   padding: 0;
   margin: 0;
 }
@@ -386,38 +379,41 @@ body {
 }
 
 .nav-bar a {
-  color: #f5da82;
+  color: #ffd54f;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation added */
+  transition: background-color 0.3s ease, transform 0.2s ease;
   font-size: 35px;
   font-weight: 700;
   position: relative;
-  -webkit-text-stroke: 2px black;
+  -webkit-text-stroke: 2px rgb(0, 0, 0);
 }
 
 .nav-bar a:hover {
-  background-color: #9f72df;
+  border: solid rgb(0, 0, 0);
   color: #fff;
   border-radius: 10px;
-  transform: translateY(-2px); /* Lift effect on hover */
+  transform: translateY(-2px);
+  -webkit-text-stroke: 2px rgb(0, 0, 0);
 }
 
 .nav-bar .logout {
-  font-size: 35px;
-  background-color: #9262ca; /* Green background */
-  color: white; /* White text */
-  border: none;
-  border-radius: 10px;
+  color: #ffd54f;
+  text-decoration: none;
   padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  background-color: transparent;
+  border: none;
+
+  position: relative;
+  -webkit-text-stroke: 2px rgb(0, 0, 0);
+  font-weight: 700;
+  font-size: 35px;
 }
 
 .nav-bar .logout:hover {
-  background-color: #6c4f8e; /* Darker green on hover */
-  transform: translateY(-2px); /* Lift effect on hover */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow on hover */
+  transform: translateY(-2px);
+  background-color: white;
+  border-radius: 20px;
 }
 
 .nav-bar .home,
@@ -426,14 +422,16 @@ body {
   color: #000000;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation added */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-bar .home:hover,
 .nav-bar .orders:hover {
   background-color: #005bb5;
-  transform: translateY(-2px); /* Lift effect on hover */
+  transform: translateY(-2px);
 }
+
+/* orders page */
 
 /* orders page */
 
@@ -441,7 +439,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: #f5f5f5; /* Light gray */
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: Tahoma, sans-serif;
@@ -449,29 +447,24 @@ body {
 
 .orders-container h2 {
   text-align: center;
-  color: #333;
+  color: #444; /* Darker gray */
   margin-bottom: 2rem;
   font-size: 2rem;
   font-weight: 600;
 }
 
 .order {
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ccc; /* Light gray border */
   border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  background-color: #fff;
+  background-color: #fff; /* White */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
 }
 
-.order:hover {
-  transform: scale(1.02);
-}
-
 .order h3 {
-  margin: 0 0 1rem 0;
-  color: #ff6f61;
+  color: #6c757d; /* Neutral color */
   font-size: 1.5rem;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 0.5rem;
@@ -491,34 +484,52 @@ body {
 
 .order h4 {
   margin: 0.5rem 0;
-  color: #555;
+  color: #555; /* Dark gray */
   font-size: 1.2rem;
   font-weight: 500;
 }
 
 .order p {
   margin: 0.25rem 0;
-  color: #333;
+  color: #333; /* Neutral color */
   font-size: 1rem;
 }
 
 .order p.price {
   font-weight: bold;
-  color: #ff5722;
+  color: #5a5a5a; /* Slightly darker gray */
   font-size: 1.1rem;
 }
 
 .loading {
   text-align: center;
   font-size: 1.5rem;
-  color: #777;
+  color: #888; /* Medium gray */
   margin-top: 2rem;
   font-weight: 500;
 }
+.remove-button {
+  margin-right: 5px;
+  background-color: #ffde71;
+  width: 150px;
+  border: solid black;
+  color: #0a0603;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.remove-button:hover {
+  background-color: #ffd54f;
+  transform: scale(1.05);
+}
 
 /* LoginPage.css */
-
-/* Container for the login form */
 .login {
   max-width: 400px;
   margin: 5% auto;
@@ -577,7 +588,7 @@ body {
 .form__login button {
   padding: 1rem;
   font-size: 1.2rem;
-  background-color: #ff6666; /* Y2K pink */
+  background-color: #ff6666;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -586,62 +597,76 @@ body {
 }
 
 .form__login button:hover {
-  background-color: #ff4d4d; /* Darker pink on hover */
+  background-color: #ff4d4d;
 }
 
-/* LandingPage.css */
 .landing {
-  font-family: Tahoma;
+  font-family: Tahoma, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 50vh;
-  background-color: rgba(
-    240,
-    248,
-    255,
-    0.5
-  ); /* Light blue background color with transparency */
+  background-color: rgba(240, 248, 255, 0.7); /* Slightly more opaque */
   text-align: center;
   padding: 20px;
+  border-radius: 10px; /* Added rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .landing-image-wrapper {
   cursor: pointer;
   margin-bottom: 20px;
-  transition: transform 0.3s ease; /* Transition for the hover effect */
+  transition: transform 0.3s ease;
 }
 
 .landing-image-wrapper:hover {
-  transform: scale(1.1); /* Scale up the image slightly on hover */
+  transform: scale(1.1);
 }
 
 .landing-image {
   width: 200px;
   height: auto;
+  border-radius: 10px; /* Rounded corners for image */
 }
 
 .landing-h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #333; /* Darker color for text */
+  color: #d335be;
+  -webkit-text-stroke: 1px rgb(0, 0, 0);
+  opacity: 0; /* Initially hidden */
+  transform: scale(0.8); /* Initially smaller */
+  animation: fadeInScale 2s ease forwards; /* Apply the animation */
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .landing-button {
   font-size: 1.2rem;
   padding: 10px 20px;
-  background-color: #7700ff; /* Button color */
+  background-color: #8c7dd3;
   border: none;
   color: white;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: solid;
-  border-color: #181427;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: solid 2px #181427; /* Solid border */
   font-size: x-large;
+  margin-bottom: 80px;
 }
 
 .landing-button:hover {
-  background-color: #f77dfc; /* Button hover color */
+  background-color: #f77dfc; /* Bright pink */
+  transform: scale(1.05); /* Slight scale effect on hover */
 }

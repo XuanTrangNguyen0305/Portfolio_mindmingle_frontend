@@ -31,6 +31,12 @@ import Milk_Coconut from "./3D/Milk_Coconut";
 import Sugar_Extra from "./3D/Sugar_Extra";
 import Duck_Cup_1 from "./3D/Duck_Cup_1";
 import Duck_Cup_2 from "./3D/Duck_Cup_2";
+import Sugar_Regular from "./3D/Sugar_Regular";
+import Flavor_Sakura from "./3D/Flavor_Sakura";
+import Flavor_Taro from "./3D/Flavor_Taro";
+import Flavor_Lychee from "./3D/Flavor_Lychee";
+import Flavor_Yuzu from "./3D/Flavor_Yuzu";
+import Flavor_Strawberry from "./3D/Flavor_Strawberry";
 interface ViewerProps {
   order: Order;
 }
@@ -53,6 +59,26 @@ interface ViewTeaProps {
 interface ViewSugarProps {
   sugarLevelId: number;
 }
+interface ViewFlavorProps {
+  flavorId: number;
+}
+const ViewFlavor = (props: ViewFlavorProps) => {
+  if (props.flavorId === 1) {
+    return <Flavor_Sakura />;
+  }
+  if (props.flavorId === 2) {
+    return <Flavor_Taro />;
+  }
+  if (props.flavorId === 3) {
+    return <Flavor_Lychee />;
+  }
+  if (props.flavorId === 4) {
+    return <Flavor_Yuzu />;
+  }
+  if (props.flavorId === 5) {
+    return <Flavor_Strawberry />;
+  }
+};
 const ViewIceLevel = (props: ViewIceLevelProps) => {
   if (props.iceLevelId === 1) {
     return null;
@@ -128,6 +154,12 @@ const ViewToppings = (props: ViewToppingProps) => {
   }
 };
 const ViewSugarLevel = (props: ViewSugarProps) => {
+  if (props.sugarLevelId === 1) {
+    return null;
+  }
+  if (props.sugarLevelId === 2) {
+    return <Sugar_Regular />;
+  }
   if (props.sugarLevelId === 3) {
     return <Sugar_Extra />;
   }
@@ -161,6 +193,7 @@ const Viewer = ({ order }: ViewerProps) => {
               <ViewTea teaId={order.teaId} />
               <ViewIceLevel iceLevelId={order.iceLevelId} />
               <ViewSugarLevel sugarLevelId={order.sugarLevelId} />
+              <ViewFlavor flavorId={order.flavorId} />
             </group>
           </Resize>
         </Stage>

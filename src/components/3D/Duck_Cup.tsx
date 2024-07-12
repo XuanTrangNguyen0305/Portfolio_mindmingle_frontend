@@ -17,7 +17,7 @@ type GLTFResult = GLTF & {
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("./3D/Duck_Cup.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} renderOrder={99}>
       <mesh
         castShadow
         receiveShadow

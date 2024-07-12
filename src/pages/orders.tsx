@@ -134,7 +134,9 @@ const OrderPage = () => {
         <p>{topping.name}</p>
         <br />
         <h3>Total price: {newTotal(order)} €</h3>
-        <button onClick={() => removeOrder(id)}>Remove</button>
+        <button className="remove-button" onClick={() => removeOrder(id)}>
+          Remove
+        </button>
       </div>
     );
   };
