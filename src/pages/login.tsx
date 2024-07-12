@@ -53,13 +53,14 @@ const UserLoginPage = () => {
   return (
     <Layout>
       <div className="login">
-        <h1>Login</h1>
+        <h1>Login </h1>
+        <p className="login-message">Please log in first to start</p>
         <form onSubmit={onSubmitTheForm} className="form__login">
           <label htmlFor="username">Username</label>
           <input type="text" name="username" id="username" />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
-          <br></br>
+          <br />
           <button type="submit" className="login_button">
             Login
           </button>

@@ -9,21 +9,30 @@ body {
 /* Global styles */
 .editor {
   display: flex;
-  /* justify-content: space-around; */
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 20px;
-}
-.order-viewer {
-  flex: 2;
-  /* margin-right: 20px; */
-  margin-left: 100px;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .order-form {
-  flex: 1;
-  margin-right: 50px;
+  background-color: rgba(
+    249,
+    249,
+    249,
+    0.8
+  ); /* Adjust the alpha for transparency */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
+  max-width: fit-content;
 }
+
+.wholeform-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center all content horizontally */
+}
+
 .canvas {
   margin-left: 50px;
 }
@@ -31,65 +40,44 @@ body {
   /* background: linear-gradient(135deg, #a881db, #5e7db4); */
   height: 700px;
   width: 700px;
-  margin-left: 100px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  position: relative;
+  left: 50px;
 }
 /* Form section styles */
-.tea-milk-button {
-  margin-bottom: 20px;
+
+.popup-content {
+  background-color: #f9f9f9; /* Light gray background */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 9px 20px rgba(97, 38, 38, 0.2);
+  max-width: 250px;
+  text-align: center;
+  border: 2px solid #ffde71; /* Bright border */
 }
 
-.next-button {
-  background-color: #ffde71; /* Y2K lavender */
-  border-color: black;
-  color: #0a0603; /* Dark text color for contrast */
-  padding: 15px 30px; /* Increase padding for larger size */
-  border: none;
-  cursor: pointer;
-  border-radius: 8px; /* Rounded corners */
-  width: 200px;
-  font-size: larger;
-  font-weight: bold; /* Bold text */
-  text-transform: uppercase; /* Uppercase text */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.next-button:hover {
-  transform: scale(1.05); /* Scale up slightly on hover */
-}
-
-.button-block {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-content: stretch;
-}
-
-/* Button styles */
-.boba-button {
-  background-color: #8c7dd3;
-  display: block;
-  width: 100%;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center; /* Align text to center */
-  height: 100%;
-}
-
-.boba-button:hover {
-  background-color: hotpink;
+.popup-content .description {
+  font-size: 16px; /* Larger font size */
+  color: #333; /* Darker text color */
+  line-height: 1.5; /* Better line spacing */
+  font-family: Tahoma;
+  font-weight: 700;
 }
 
 .info-button {
+  cursor: pointer;
+  transition: transform 0.2s; /* Smooth scaling */
   display: block;
-  background-color: hotpink;
+  background-color: rgb(252, 150, 201);
   color: white;
-  border: 2px solid blue;
+  border: 2px solid #3b2e7a;
   height: 40px;
   aspect-ratio: 1;
   border-radius: 999px;
@@ -97,20 +85,124 @@ body {
   place-items: center;
 }
 
+.info-button:hover {
+  opacity: 0.8;
+  transform: scale(1.1); /* Slightly scale up on hover */
+}
+.description {
+  background-color: white;
+}
+
+.popup-arrow {
+  fill: #ffde71; /* Bright arrow color */
+}
+
+.universe-button {
+  background-color: hotpink; /* Bright hotpink background */
+  border: none;
+  color: #ffffff; /* White text */
+  height: 10vh;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5),
+    0 0 25px rgba(255, 223, 113, 0.7); /* Glowing effect */
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  position: relative; /* Necessary for ::before */
+}
+
+.universe-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 20%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s;
+}
+
+.universe-button:hover {
+  background-color: #ff69b4; /* Lighter shade on hover */
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.9); /* Increased glow */
+  color: #fff; /* Keep text white */
+}
+
+.universe-button:hover::before {
+  transform: scale(1); /* Activate glowing effect */
+}
+
+.tea-milk {
+  display: flex;
+  justify-content: center; /* Center tea and milk sections */
+  align-items: flex-start; /* Align items to the top */
+  gap: 20px; /* Space between tea and milk sections */
+  margin-top: 10px;
+}
+/* Label styles */
+.label {
+  display: inline-flex;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-family: Tahoma;
+  font-size: larger;
+}
+
+.boba-button {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  padding: 0;
+  align-items: center;
+  background-color: #8c7dd3;
+  width: 200px;
+  height: 100px; /* Adjust as needed */
+  line-height: 1.2; /* Reduce line height for tighter spacing */
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  color: white;
+  font-size: 22px;
+  text-align: center; /* Center text */
+}
+
+.boba-button:hover {
+  background-color: #3b2e7a;
+}
+.boba-button h4 {
+  margin: 0; /* Remove default margin */
+  font-size: 22px; /* Maintain font size */
+}
+
+.boba-button h4:first-child {
+  margin-bottom: 5px; /* Add slight margin below the tea name */
+}
+
+.boba-button h4:last-child {
+  margin-top: 0; /* Ensure no top margin for price */
+  font-size: 20px;
+}
+
 .active {
-  background-color: #ffde71;
+  background-color: #3b2e7a;
 }
 
 .button-row {
   display: flex;
   gap: 10px;
   align-items: center;
-}
-
-.description {
-  background-color: white;
-  color: black;
-  border: 1px solid black;
 }
 
 /* Optional: Adjust styles for button text */
@@ -139,46 +231,121 @@ body {
   color: white;
 }
 
-/* Label styles */
-.label {
-  display: block;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  font-family: Tahoma;
-}
-
-/* Input button styles */
-input[type="submit"],
-button[type="submit"] {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #f5da82;
-  border: solid;
-  border-color: #181427;
-  color: rgb(27, 19, 19);
-  border-radius: 5px;
+.next-button {
+  background-color: #ffde71;
+  width: 150px;
+  border: solid black;
+  color: #0a0603;
+  padding: 15px 30px;
   cursor: pointer;
-  font-size: 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: larger;
   font-weight: bold;
-  width: 200px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-left: 50px;
 }
-
-input[type="submit"]:hover,
-button[type="submit"]:hover {
-  background-color: #4c3886;
+.next-button1 {
+  margin-right: 5px;
+  background-color: #ffde71;
+  width: 150px;
+  border: solid black;
+  color: #0a0603;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.next-button1:hover {
+  background-color: #ffd54f;
+  transform: scale(1.05);
+}
+.back-button {
+  background-color: #0c0c0c;
+  width: 150px;
+  border: solid black;
   color: white;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-left: 200px;
+}
+.back-button1 {
+  background-color: #0c0c0c;
+  width: 150px;
+  border: solid black;
+  color: white;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-left: 325px;
+}
+.next-button:hover {
+  background-color: #ffd54f;
+  transform: scale(1.05);
 }
 
-/* styles.css or Navbar.module.css */
+.back-button:hover {
+  transform: scale(1.05);
+}
+.back-button1:hover {
+  transform: scale(1.05);
+}
+.next-back {
+  display: flex;
+  justify-content: space-between; /* Space out the buttons */
+  margin-top: 20px;
+}
+.submit-back {
+  display: flex;
+  justify-content: space-between; /* Space out the buttons */
+  margin-top: 20px;
+}
+.submit-button {
+  background-color: #ffde71; /* Same background color */
+  width: 150px;
+  border: solid black;
+  color: #0a0603;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.submit-button:hover {
+  background-color: #ffde71; /* Same hover effect */
+  transform: scale(1.05);
+}
+/* Navbar.module.css */
 .nav-bar-logo {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  justify-content: center; /* Center the logo */
+  width: 100%; /* Take full width */
   color: #fff;
-  /* margin-left: 20px; */
   font-family: Tahoma;
   padding: 0;
   margin-top: -30px;
@@ -186,16 +353,28 @@ button[type="submit"]:hover {
 }
 
 .nav-bar {
-  margin-left: 600px;
-  padding: 0;
-}
-.nav-bar-logo img {
-  margin-left: 20px;
-}
-.nav-bar ul {
-  list-style: none;
   display: flex;
-  gap: 1rem;
+  justify-content: flex-end;
+  margin-left: auto;
+  position: absolute; /* Keep navbar at the top right */
+  right: 0; /* Align to the right */
+  top: 0; /* Align to the top */
+  margin-top: 70px;
+  margin-right: 50px;
+}
+
+.nav-bar-logo img {
+  transition: transform 0.3s ease;
+  margin-right: 20px; /* Space between logo and navbar */
+}
+
+.nav-bar-logo img:hover {
+  transform: scale(1.1);
+}
+
+.nav-bar ul {
+  display: flex;
+  gap: 2rem; /* Space between navbar items */
   padding: 0;
   margin: 0;
 }
@@ -203,40 +382,42 @@ button[type="submit"]:hover {
 .nav-bar li {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .nav-bar a {
   color: #f5da82;
-  border: #000;
-
   text-decoration: none;
   padding: 0.5rem 1rem;
-  transition: background-color 0.3s ease;
-  font-size: 25px;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation added */
+  font-size: 35px;
   font-weight: 700;
-  position: relative; /* Ensures the positioning context for pseudo-elements */
-  -webkit-text-stroke: 1.5px black;
+  position: relative;
+  -webkit-text-stroke: 2px black;
 }
 
 .nav-bar a:hover {
-  background-color: #9f72df; /* Adjusted background color on hover */
-  color: #fff; /* Changed text color on hover */
+  background-color: #9f72df;
+  color: #fff;
   border-radius: 10px;
+  transform: translateY(-2px); /* Lift effect on hover */
 }
 
 .nav-bar .logout {
-  background-color: #ff4c4c;
-  color: #fff;
+  font-size: 35px;
+  background-color: #9262ca; /* Green background */
+  color: white; /* White text */
   border: none;
   border-radius: 10px;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: larger;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
 .nav-bar .logout:hover {
-  background-color: #ff1a1a;
+  background-color: #6c4f8e; /* Darker green on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow on hover */
 }
 
 .nav-bar .home,
@@ -245,12 +426,13 @@ button[type="submit"]:hover {
   color: #000000;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation added */
 }
 
 .nav-bar .home:hover,
 .nav-bar .orders:hover {
   background-color: #005bb5;
+  transform: translateY(-2px); /* Lift effect on hover */
 }
 
 /* orders page */
@@ -260,31 +442,40 @@ button[type="submit"]:hover {
   margin: 0 auto;
   padding: 2rem;
   background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: Tahoma, sans-serif;
 }
 
 .orders-container h2 {
   text-align: center;
   color: #333;
   margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .order {
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.order:hover {
+  transform: scale(1.02);
 }
 
 .order h3 {
   margin: 0 0 1rem 0;
-  color: #007bff;
-  font-size: 1.25rem;
-  border-bottom: 1px solid #e0e0e0;
+  color: #ff6f61;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
   padding-bottom: 0.5rem;
+  text-align: center;
 }
 
 .order-details {
@@ -301,44 +492,61 @@ button[type="submit"]:hover {
 .order h4 {
   margin: 0.5rem 0;
   color: #555;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .order p {
   margin: 0.25rem 0;
   color: #333;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .order p.price {
   font-weight: bold;
-  color: #000;
+  color: #ff5722;
+  font-size: 1.1rem;
 }
 
 .loading {
   text-align: center;
   font-size: 1.5rem;
   color: #777;
+  margin-top: 2rem;
+  font-weight: 500;
 }
 
-/* log in page  */
+/* LoginPage.css */
+
+/* Container for the login form */
 .login {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 5% auto;
   padding: 2rem;
   border: 2px solid #0e0c0c;
   border-radius: 10px;
   background-color: #f7d74b; /* Y2K yellow */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Tahoma;
+}
+/* Login message style */
+.login p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #707175;
+  margin-top: 1rem;
 }
 
+/* Heading style */
 .login h1 {
-  font-size: 2.5rem;
-  text-align: center;
+  font-size: 2 rem;
   margin-bottom: 1rem;
   color: #2c314e;
 }
 
+/* Form container */
 .form__login {
   display: flex;
   flex-direction: column;
@@ -348,6 +556,7 @@ button[type="submit"]:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Label style */
 .form__login label {
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -355,6 +564,7 @@ button[type="submit"]:hover {
   font-size: larger;
 }
 
+/* Input field style */
 .form__login input {
   padding: 1rem;
   font-size: 1.2rem;
@@ -363,6 +573,7 @@ button[type="submit"]:hover {
   margin-bottom: 1rem;
 }
 
+/* Button style */
 .form__login button {
   padding: 1rem;
   font-size: 1.2rem;
@@ -378,10 +589,59 @@ button[type="submit"]:hover {
   background-color: #ff4d4d; /* Darker pink on hover */
 }
 
-.login_message {
-  font-size: 1rem;
+/* LandingPage.css */
+.landing {
+  font-family: Tahoma;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  background-color: rgba(
+    240,
+    248,
+    255,
+    0.5
+  ); /* Light blue background color with transparency */
   text-align: center;
-  color: #777;
-  margin-top: 1rem;
+  padding: 20px;
 }
-/* user-login-styles.module.css */
+
+.landing-image-wrapper {
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease; /* Transition for the hover effect */
+}
+
+.landing-image-wrapper:hover {
+  transform: scale(1.1); /* Scale up the image slightly on hover */
+}
+
+.landing-image {
+  width: 200px;
+  height: auto;
+}
+
+.landing-h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333; /* Darker color for text */
+}
+
+.landing-button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: #7700ff; /* Button color */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: solid;
+  border-color: #181427;
+  font-size: x-large;
+}
+
+.landing-button:hover {
+  background-color: #f77dfc; /* Button hover color */
+}

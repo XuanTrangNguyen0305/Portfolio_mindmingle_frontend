@@ -24,7 +24,12 @@ const OptionValidator = z.object({
     z.object({ id: z.number(), name: z.string(), price: z.number() })
   ),
   toppings: z.array(
-    z.object({ id: z.number(), name: z.string(), price: z.number() })
+    z.object({
+      id: z.number(),
+      name: z.string(),
+      price: z.number(),
+      description: z.string(),
+    })
   ),
   flavors: z.array(
     z.object({ id: z.number(), name: z.string(), description: z.string() })
@@ -200,18 +205,17 @@ const OrderForm = () => {
       <div className="order-viewer">
         <Viewer order={order} />
       </div>
-      <div>
-        <button type="button" onClick={random}>
-          ✨Let the Universe decide✨
-        </button>
-      </div>
       <form className="order-form" onSubmit={handleFormSubmit}>
-        <div className="tea-milk-button">
+        <div className="wholeform-div">
+          <button className="universe-button" type="button" onClick={random}>
+            ✨ Let the Universe decide ✨
+          </button>
           {showButtons1 && (
-            <>
+            <div className="tea-milk">
               {/* Teas */}
-              <label className="label">Tea choices</label>
-              <div className="button-block">
+
+              <div className="tea-selection">
+                <label className="label">Tea choices</label>
                 {options.teas.map((tea) => (
                   <div key={tea.id} className="button-row">
                     <button
@@ -242,7 +246,7 @@ const OrderForm = () => {
                           </svg>
                         </button>
                       }
-                      position="left center"
+                      position="right center"
                     >
                       <p className="description"> {tea.description}</p>
                     </Popup>
@@ -251,163 +255,205 @@ const OrderForm = () => {
               </div>
 
               {/* Milk */}
-              <label className="label">Milk choices</label>
-              {options.milk.map((milk) => (
-                <button
-                  key={milk.id}
-                  type="button"
-                  className="boba-button"
-                  style={{
-                    backgroundColor:
-                      order.milkId === milk.id ? "#ffde71" : "#8c7dd3",
-                    color: "white",
-                  }}
-                  onClick={() => {
-                    setOrder({ ...order, milkId: milk.id });
-                  }}
-                >
-                  <h4>{milk.name}</h4>
-                  <h4> {milk.price} €</h4>
+              <div className="milk-selection">
+                <label className="label">Milk choices</label>
+                {options.milk.map((milk) => (
+                  <button
+                    key={milk.id}
+                    type="button"
+                    className={`boba-button ${
+                      order.milkId === milk.id && "active"
+                    }`}
+                    onClick={() => {
+                      setOrder({ ...order, milkId: milk.id });
+                    }}
+                  >
+                    <h4>{milk.name}</h4>
+                    <h4> {milk.price} €</h4>
+                  </button>
+                ))}
+                <button className="next-button" onClick={showNextButtons}>
+                  Next
                 </button>
-              ))}
-              <button className="next-button" onClick={showNextButtons}>
-                Next
-              </button>
-            </>
+              </div>
+            </div>
           )}
         </div>
 
         {showButtons2 && (
           <>
-            {/* Flavors */}
-            <label className="label">Flavor choices</label>
-            {options.flavors.map((flavor) => (
-              <button
-                key={flavor.id}
-                type="button"
-                className="boba-button"
-                style={{
-                  backgroundColor:
-                    order.flavorId === flavor.id ? "#ffde71" : "#8c7dd3",
-                  color: "white",
-                }}
-                onClick={() => {
-                  setOrder({ ...order, flavorId: flavor.id });
-                }}
-              >
-                <h4>{flavor.name}</h4>
-                <img src="https://img.icons8.com/?size=20&id=CWiCmUhQTh3E&format=png&color=000000" />
-              </button>
-            ))}
+            <div className="tea-milk">
+              {/* Flavors */}
+              <div className="tea-selection">
+                <label className="label">Flavor choices</label>
+                {options.flavors.map((flavor) => (
+                  <div className="button-row">
+                    <button
+                      key={flavor.id}
+                      type="button"
+                      className={`boba-button ${
+                        order.flavorId === flavor.id && "active"
+                      }`}
+                      onClick={() => {
+                        setOrder({ ...order, flavorId: flavor.id });
+                      }}
+                    >
+                      <h4>{flavor.name}</h4>
+                    </button>
+                    <Popup
+                      trigger={
+                        <button type="button" className="info-button">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                          </svg>
+                        </button>
+                      }
+                      position="right center"
+                    >
+                      <p className="description"> {flavor.description}</p>
+                    </Popup>
+                  </div>
+                ))}
+              </div>
 
-            {/* Toppings */}
-            <label className="label">Topping choices</label>
-            {options.toppings.map((topping) => (
+              {/* Toppings */}
+              <div className="milk-selection">
+                <label className="label">Topping choices</label>
+                {options.toppings.map((topping) => (
+                  <div className="button-row">
+                    <button
+                      key={topping.id}
+                      type="button"
+                      className={`boba-button ${
+                        order.toppingId === topping.id && "active"
+                      }`}
+                      onClick={() => {
+                        setOrder({ ...order, toppingId: topping.id });
+                      }}
+                    >
+                      <h4>{topping.name}</h4>
+                      <h4>{topping.price} €</h4>
+                    </button>
+                    <Popup
+                      trigger={
+                        <button type="button" className="info-button">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                          </svg>
+                        </button>
+                      }
+                      position="right center"
+                    >
+                      <p className="description"> {topping.description}</p>
+                    </Popup>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="next-back">
               <button
-                key={topping.id}
                 type="button"
-                className="boba-button"
-                style={{
-                  backgroundColor:
-                    order.toppingId === topping.id ? "#ffde71" : "#8c7dd3",
-                  color: "white",
-                }}
-                onClick={() => {
-                  setOrder({ ...order, toppingId: topping.id });
-                }}
+                className="back-button"
+                onClick={showBackButton}
               >
-                <h4>{topping.name}</h4>
-                <img src="https://img.icons8.com/?size=20&id=CWiCmUhQTh3E&format=png&color=000000" />
+                Back
               </button>
-            ))}
-            <button className="next-button" onClick={showFinalButtons}>
-              Next
-            </button>
-
-            <button
-              type="button"
-              className="boba-button"
-              onClick={showBackButton}
-            >
-              Back
-            </button>
+              <button className="next-button1" onClick={showFinalButtons}>
+                Next
+              </button>
+            </div>
           </>
         )}
 
         {showButtons3 && (
           <>
-            {/* IceLevels */}
-            <label className="label">Ice Level</label>
-            {options.iceLevels.map((iceLvl) => (
-              <button
-                key={iceLvl.id}
-                type="button"
-                className="button"
-                style={{
-                  backgroundColor:
-                    order.iceLevelId === iceLvl.id ? "#ffde71" : "#8c7dd3",
-                  color: "white",
-                }}
-                onClick={() => {
-                  setOrder({ ...order, iceLevelId: iceLvl.id });
-                }}
-              >
-                <h4>{iceLvl.name}</h4>
-              </button>
-            ))}
-
-            {/* SugarLevels */}
-            <label className="label">Sugar Level</label>
-            {options.sugarLevels.map((sugarLvl) => (
-              <button
-                key={sugarLvl.id}
-                type="button"
-                className="button"
-                style={{
-                  backgroundColor:
-                    order.sugarLevelId === sugarLvl.id ? "#ffde71" : "#8c7dd3",
-                  color: "white",
-                }}
-                onClick={() => {
-                  setOrder({ ...order, sugarLevelId: sugarLvl.id });
-                }}
-              >
-                <h4>{sugarLvl.name}</h4>
-              </button>
-            ))}
-
-            {/* Cups */}
-            <label className="label">Cup choices</label>
-            {options.cups.map((cup) => (
-              <button
-                key={cup.id}
-                type="button"
-                className="button"
-                style={{
-                  backgroundColor:
-                    order.cupId === cup.id ? "#ffde71" : "#8c7dd3",
-                  color: "white",
-                }}
-                onClick={() => {
-                  setOrder({ ...order, cupId: cup.id });
-                }}
-              >
-                <h4>{cup.name}</h4>
-                <h4>{cup.price} €</h4>
-              </button>
-            ))}
-            <button type="submit">Submit</button>
-            <button
-              type="button"
-              className="back-button"
-              onClick={showBackButton2}
-            >
-              Back
-            </button>
+            <div className="tea-milk">
+              {/* IceLevels */}
+              <div className="tea-selection">
+                <label className="label">Ice Level</label>
+                {options.iceLevels.map((iceLvl) => (
+                  <button
+                    key={iceLvl.id}
+                    type="button"
+                    className={`boba-button ${
+                      order.iceLevelId === iceLvl.id && "active"
+                    }`}
+                    onClick={() => {
+                      setOrder({ ...order, iceLevelId: iceLvl.id });
+                    }}
+                  >
+                    <h4>{iceLvl.name}</h4>
+                  </button>
+                ))}
+              </div>
+              {/* SugarLevels */}
+              <div className="tea-selection">
+                <label className="label">Sugar Level</label>
+                {options.sugarLevels.map((sugarLvl) => (
+                  <button
+                    key={sugarLvl.id}
+                    type="button"
+                    className={`boba-button ${
+                      order.sugarLevelId === sugarLvl.id && "active"
+                    }`}
+                    onClick={() => {
+                      setOrder({ ...order, sugarLevelId: sugarLvl.id });
+                    }}
+                  >
+                    <h4>{sugarLvl.name}</h4>
+                  </button>
+                ))}
+              </div>
+              {/* Cups */}
+              <div className="tea-selection">
+                <label className="label">Cup choices</label>
+                {options.cups.map((cup) => (
+                  <button
+                    key={cup.id}
+                    type="button"
+                    className={`boba-button ${
+                      order.cupId === cup.id && "active"
+                    }`}
+                    onClick={() => {
+                      setOrder({ ...order, cupId: cup.id });
+                    }}
+                  >
+                    <h4>{cup.name}</h4>
+                    <h4>{cup.price} €</h4>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="submit-back">
+                <button
+                  type="button"
+                  className="back-button1"
+                  onClick={showBackButton2}
+                >
+                  Back
+                </button>
+                <button type="submit" className="submit-button">
+                  Submit
+                </button>
+              </div>
+            </div>
           </>
         )}
-        {/* </div>
-        </div> */}
       </form>
     </main>
   );
