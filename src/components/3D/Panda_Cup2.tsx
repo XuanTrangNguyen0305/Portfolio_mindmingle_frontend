@@ -9,25 +9,35 @@ import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Duck_Bottle_1: THREE.Mesh;
+    Panda_Cup2: THREE.Mesh;
   };
   materials: {};
 };
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("./3D/Duck_Bottle_1.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./3D/Panda_Cup2.glb") as GLTFResult;
   return (
     <group {...props} dispose={null} renderOrder={99}>
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.Duck_Bottle_1.geometry}
+        geometry={nodes.Panda_Cup2.geometry}
+        material={nodes.Panda_Cup2.material}
         rotation={[Math.PI / 2, 0, 0]}
       >
-        <meshPhysicalMaterial color="#FFCC00" />
+        <meshPhysicalMaterial
+          transparent
+          opacity={0.4}
+          transmission={0.6}
+          thickness={0.8}
+          ior={1.3}
+          roughness={0.8}
+          clearcoat={0.6}
+          color={"white"}
+        />
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/Duck_Bottle_1.glb");
+useGLTF.preload("/Panda_Cup2.glb");

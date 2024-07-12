@@ -37,6 +37,8 @@ import Flavor_Taro from "./3D/Flavor_Taro";
 import Flavor_Lychee from "./3D/Flavor_Lychee";
 import Flavor_Yuzu from "./3D/Flavor_Yuzu";
 import Flavor_Strawberry from "./3D/Flavor_Strawberry";
+import Panda_Cup2 from "./3D/Panda_Cup2";
+import Panda_Cup1 from "./3D/Panda_Cup1";
 interface ViewerProps {
   order: Order;
 }
@@ -110,7 +112,12 @@ const ViewCup = (props: ViewCupProps) => {
   }
 
   if (props.cupId === 2) {
-    return <Panda_Cup />;
+    return (
+      <group>
+        <Panda_Cup1 />
+        <Panda_Cup2 />
+      </group>
+    );
   }
 };
 const ViewMilk = (props: ViewMilkProps) => {
