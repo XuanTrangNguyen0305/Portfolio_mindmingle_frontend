@@ -258,19 +258,21 @@ const OrderForm = () => {
               <div className="milk-selection">
                 <label className="label">Milk choices</label>
                 {options.milk.map((milk) => (
-                  <button
-                    key={milk.id}
-                    type="button"
-                    className={`boba-button ${
-                      order.milkId === milk.id && "active"
-                    }`}
-                    onClick={() => {
-                      setOrder({ ...order, milkId: milk.id });
-                    }}
-                  >
-                    <h4>{milk.name}</h4>
-                    <h4> {milk.price} €</h4>
-                  </button>
+                  <div key={milk.id}>
+                    <button
+                      key={milk.id}
+                      type="button"
+                      className={`boba-button ${
+                        order.milkId === milk.id && "active"
+                      }`}
+                      onClick={() => {
+                        setOrder({ ...order, milkId: milk.id });
+                      }}
+                    >
+                      <h4>{milk.name}</h4>
+                      <h4> {milk.price} €</h4>
+                    </button>
+                  </div>
                 ))}
                 <button className="next-button" onClick={showNextButtons}>
                   Next
@@ -287,7 +289,7 @@ const OrderForm = () => {
               <div className="tea-selection">
                 <label className="label">Flavor choices</label>
                 {options.flavors.map((flavor) => (
-                  <div className="button-row">
+                  <div key={flavor.id} className="button-row">
                     <button
                       key={flavor.id}
                       type="button"
@@ -327,7 +329,7 @@ const OrderForm = () => {
               <div className="milk-selection">
                 <label className="label">Topping choices</label>
                 {options.toppings.map((topping) => (
-                  <div className="button-row">
+                  <div key={topping.id} className="button-row">
                     <button
                       key={topping.id}
                       type="button"
@@ -386,55 +388,61 @@ const OrderForm = () => {
               <div className="tea-selection">
                 <label className="label">Ice Level</label>
                 {options.iceLevels.map((iceLvl) => (
-                  <button
-                    key={iceLvl.id}
-                    type="button"
-                    className={`boba-button ${
-                      order.iceLevelId === iceLvl.id && "active"
-                    }`}
-                    onClick={() => {
-                      setOrder({ ...order, iceLevelId: iceLvl.id });
-                    }}
-                  >
-                    <h4>{iceLvl.name}</h4>
-                  </button>
+                  <div key={iceLvl.id}>
+                    <button
+                      key={iceLvl.id}
+                      type="button"
+                      className={`boba-button ${
+                        order.iceLevelId === iceLvl.id && "active"
+                      }`}
+                      onClick={() => {
+                        setOrder({ ...order, iceLevelId: iceLvl.id });
+                      }}
+                    >
+                      <h4>{iceLvl.name}</h4>
+                    </button>
+                  </div>
                 ))}
               </div>
               {/* SugarLevels */}
               <div className="tea-selection">
                 <label className="label">Sugar Level</label>
                 {options.sugarLevels.map((sugarLvl) => (
-                  <button
-                    key={sugarLvl.id}
-                    type="button"
-                    className={`boba-button ${
-                      order.sugarLevelId === sugarLvl.id && "active"
-                    }`}
-                    onClick={() => {
-                      setOrder({ ...order, sugarLevelId: sugarLvl.id });
-                    }}
-                  >
-                    <h4>{sugarLvl.name}</h4>
-                  </button>
+                  <div key={sugarLvl.id}>
+                    <button
+                      key={sugarLvl.id}
+                      type="button"
+                      className={`boba-button ${
+                        order.sugarLevelId === sugarLvl.id && "active"
+                      }`}
+                      onClick={() => {
+                        setOrder({ ...order, sugarLevelId: sugarLvl.id });
+                      }}
+                    >
+                      <h4>{sugarLvl.name}</h4>
+                    </button>
+                  </div>
                 ))}
               </div>
               {/* Cups */}
               <div className="tea-selection">
                 <label className="label">Cup choices</label>
                 {options.cups.map((cup) => (
-                  <button
-                    key={cup.id}
-                    type="button"
-                    className={`boba-button ${
-                      order.cupId === cup.id && "active"
-                    }`}
-                    onClick={() => {
-                      setOrder({ ...order, cupId: cup.id });
-                    }}
-                  >
-                    <h4>{cup.name}</h4>
-                    <h4>{cup.price} €</h4>
-                  </button>
+                  <div key={cup.id}>
+                    <button
+                      key={cup.id}
+                      type="button"
+                      className={`boba-button ${
+                        order.cupId === cup.id && "active"
+                      }`}
+                      onClick={() => {
+                        setOrder({ ...order, cupId: cup.id });
+                      }}
+                    >
+                      <h4>{cup.name}</h4>
+                      <h4>{cup.price} €</h4>
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>
