@@ -25,8 +25,6 @@ import Tea_Green from "./3D/Tea_Green";
 import Tea_Butterfly from "./3D/Tea_Butterfly";
 import Tea_Hibicus from "./3D/Tea_Hibicus";
 import Pudding from "./3D/Pudding";
-import Duck_Cup from "./3D/Duck_Cup";
-import Panda_Cup from "./3D/Panda_Cup";
 import Milk_Coconut from "./3D/Milk_Coconut";
 import Sugar_Extra from "./3D/Sugar_Extra";
 import Duck_Cup_1 from "./3D/Duck_Cup_1";

@@ -26,16 +26,12 @@ const Navbar = () => {
           {/* <li>
             <Link href="/">About Us</Link>
           </li> */}
-          {!isLoggedIn && (
-            <li>
-              <Link href="/register">Register</Link>
-            </li>
-          )}
+
+          <li>
+            <Link href="/orders">Your Orders</Link>
+          </li>
           {isLoggedIn ? (
             <>
-              <li>
-                <Link href="/orders">Your Orders</Link>
-              </li>
               <li>
                 <button className="logout" onClick={logOut}>
                   Log Out

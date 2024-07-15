@@ -36,19 +36,19 @@ interface Order {
 
 const OrderPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [token, setToken] = useState<string | null>(null);
+  // const [token, setToken] = useState<string | null>(null);
 
   const getOrdersFromApi = useCallback(async () => {
-    if (token === null) {
-      return;
-    }
+    // if (token === null) {
+    //   return;
+    // }
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/orders`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
         }
       );
       if (!response.ok) {
@@ -59,17 +59,17 @@ const OrderPage = () => {
     } catch (error) {
       console.error("Error fetching orders:", error);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
-    const tokenFromStorage = localStorage.getItem("token");
-    if (tokenFromStorage === null) {
-      alert("Please log in to view your orders");
-      console.log("Login to see your orders");
-      router.push("/login");
-      return;
-    }
-    setToken(tokenFromStorage);
+    // const tokenFromStorage = localStorage.getItem("token");
+    // if (tokenFromStorage === null) {
+    //   alert("Please log in to view your orders");
+    //   console.log("Login to see your orders");
+    //   router.push("/login");
+
+    // }
+    // setToken(tokenFromStorage);
 
     getOrdersFromApi();
   }, [getOrdersFromApi]);
@@ -81,9 +81,9 @@ const OrderPage = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/orders/${id}`,
         {
           method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
         }
       );
       if (!response.ok) {

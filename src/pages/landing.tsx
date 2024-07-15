@@ -6,15 +6,15 @@ import bubbletea from "../image/bubbletea.png"; // Adjust the path if necessary
 export default function Land() {
   const router = useRouter();
 
-  useEffect(() => {
-    const tokenFromStorage = localStorage.getItem("token");
-    if (tokenFromStorage) {
-      router.push("/home");
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   const tokenFromStorage = localStorage.getItem("token");
+  //   if (tokenFromStorage) {
+  //     router.push("/home");
+  //   }
+  // }, [router]);
 
   const handleStartClick = () => {
-    router.push("/login");
+    router.push("/home");
   };
 
   return (
