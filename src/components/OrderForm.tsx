@@ -3,6 +3,7 @@ import { z } from "zod";
 import Viewer from "./Viewer";
 import router from "next/router";
 import Popup from "reactjs-popup";
+import ProgressBar from "./ProgressBar";
 const orderValidator = z
   .object({
     sugarLevelId: z.number().positive(),
@@ -275,6 +276,7 @@ const OrderForm = () => {
                 <button className="next-button" onClick={showNextButtons}>
                   Next
                 </button>
+                <ProgressBar bgcolor={"blue"} completed={0} />
               </div>
             </div>
           )}
@@ -375,6 +377,7 @@ const OrderForm = () => {
               <button className="next-button1" onClick={showFinalButtons}>
                 Next
               </button>
+              <ProgressBar bgcolor={"blue"} completed={50} />
             </div>
           </>
         )}
@@ -456,6 +459,7 @@ const OrderForm = () => {
                 <button type="submit" className="submit-button">
                   Submit
                 </button>
+                <ProgressBar bgcolor={"blue"} completed={100} />
               </div>
             </div>
           </>
