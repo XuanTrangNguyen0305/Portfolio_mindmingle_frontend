@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import router, { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import Viewer from "@/components/Viewer";
 interface Order {
   id: number;
   cup: {

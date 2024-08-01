@@ -328,7 +328,7 @@ const OrderForm = () => {
                     >
                       <h4>
                         {topping.name} <br />
-                        {topping.price}€
+                        {topping.price} €
                       </h4>
                     </button>
                     <Popup
@@ -440,7 +440,7 @@ const OrderForm = () => {
                       <h4>
                         {cup.name}
                         <br />
-                        {cup.price}€
+                        {cup.price} €
                       </h4>
                     </button>
                   </div>
