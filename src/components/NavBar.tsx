@@ -28,7 +28,7 @@ const Navbar = () => {
           <button className="order-button">
             <Link href="/orders">Your Orders</Link>
           </button>
-          {isLoggedIn ? (
+          {/* {isLoggedIn ? (
             <>
               <button className="logout-button">
                 <button className="logout" onClick={logOut}>
@@ -40,7 +40,7 @@ const Navbar = () => {
             <button className="login-button">
               <Link href="/login">Login</Link>
             </button>
-          )}
+          )} */}
         </ul>
       </nav>
     </div>
