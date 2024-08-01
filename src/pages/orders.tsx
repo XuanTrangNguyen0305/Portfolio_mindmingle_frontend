@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
-
+import Image from "next/image";
 interface Order {
   id: number;
   cup: {
@@ -36,21 +36,10 @@ interface Order {
 
 const OrderPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  // const [token, setToken] = useState<string | null>(null);
 
   const getOrdersFromApi = useCallback(async () => {
-    // if (token === null) {
-    //   return;
-    // }
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/orders`,
-        {
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-          // },
-        }
-      );
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`);
       if (!response.ok) {
         throw new Error("Failed to fetch orders");
       }
@@ -62,18 +51,12 @@ const OrderPage = () => {
   }, []);
 
   useEffect(() => {
-    // const tokenFromStorage = localStorage.getItem("token");
-    // if (tokenFromStorage === null) {
-    //   alert("Please log in to view your orders");
-    //   console.log("Login to see your orders");
-    //   router.push("/login");
-
-    // }
-    // setToken(tokenFromStorage);
-
     getOrdersFromApi();
   }, [getOrdersFromApi]);
 
+  const pushBack = () => {
+    router.push("/home");
+  };
   const removeOrder = async (id: number) => {
     console.log(`Removing order with ID: ${id}`);
     try {
@@ -81,15 +64,12 @@ const OrderPage = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/orders/${id}`,
         {
           method: "DELETE",
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-          // },
         }
       );
       if (!response.ok) {
         throw new Error("Failed to remove order");
       }
-      // Update state locally after successful deletion
+
       setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
     } catch (error) {
       console.error("Error removing order:", error);
@@ -105,7 +85,6 @@ const OrderPage = () => {
 
   const OrderList = ({ order }: { order: Order }) => {
     const { id, cup, iceLevel, sugarLevel, flavor, tea, milk, topping } = order;
-
     return (
       <div className="order">
         <h3>Order ID: {id}</h3>
@@ -134,9 +113,19 @@ const OrderPage = () => {
         <p>{topping.name}</p>
         <br />
         <h3>Total price: {newTotal(order)} €</h3>
-        <button className="remove-button" onClick={() => removeOrder(id)}>
-          Remove
-        </button>
+        <div className="back-remove">
+          <button type="button" className="back-button" onClick={pushBack}>
+            <Image
+              src="/image/back-button.svg"
+              alt="back"
+              width={80}
+              height={80}
+            />
+          </button>
+          <button className="remove-button" onClick={() => removeOrder(id)}>
+            Remove
+          </button>
+        </div>
       </div>
     );
   };

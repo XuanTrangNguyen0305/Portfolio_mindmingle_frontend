@@ -62,7 +62,6 @@ const OrderForm = () => {
   });
 
   const [options, setOptions] = useState<Options | null>(null);
-  // const [token, setToken] = useState<string | null>(null);
   const [showButtons1, setShowButtons1] = useState(true);
   const [showButtons2, setShowButtons2] = useState(false);
   const [showButtons3, setShowButtons3] = useState(false);
@@ -70,14 +69,6 @@ const OrderForm = () => {
   const [backButton2, setBackbutton2] = useState(true);
 
   useEffect(() => {
-    // const tokenFromStorage = localStorage.getItem("token");
-    // if (tokenFromStorage === null) {
-    //   router.push("/");
-    //   return;
-    // } else {
-    //   setToken(tokenFromStorage);
-    // }
-
     const getOptionsfromAPI = async () => {
       try {
         const response = await fetch(
@@ -150,7 +141,6 @@ const OrderForm = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(validated.data),
         }
@@ -190,13 +180,6 @@ const OrderForm = () => {
     setBackbutton2(false);
     setShowButtons3(false);
   };
-  // const [open, setOpen] = useState(false);
-  // const openModal = () => {
-  //   setOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setOpen(false);
-  // };
   if (!options) {
     return <p>Loading...</p>;
   }
@@ -274,7 +257,7 @@ const OrderForm = () => {
                 </div>
               ))}
               <div className="progress-buttons-container">
-                <Progress_bar bgcolor="#2846a6" progress={0} height="30px" />
+                <Progress_bar bgcolor="#2846a6" progress={20} height="30px" />
                 <button className="next-button" onClick={showNextButtons}>
                   <Image
                     src="/image/next-button.svg"

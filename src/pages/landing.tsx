@@ -27,12 +27,12 @@ export default function Land() {
           />
           <button
             onClick={handleStartClick}
-            className="button-82-pushable"
+            className="landing-button-pushable"
             role="button"
           >
-            <span className="button-82-shadow"></span>
-            <span className="button-82-edge"></span>
-            <span className="button-82-front text">Enter</span>
+            <span className="landing-button-shadow"></span>
+            <span className="landing-button-edge"></span>
+            <span className="landing-button-front text">Enter</span>
           </button>
         </div>
       </div>

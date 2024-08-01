@@ -109,7 +109,7 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-right: 50px;
 }
 
@@ -501,27 +501,56 @@ body {
   margin-top: 2rem;
   font-weight: 500;
 }
+
 .remove-button {
-  margin-right: 5px;
-  background-color: #ffde71;
-  width: 150px;
-  border: solid black;
-  color: #0a0603;
-  padding: 15px 30px;
-  cursor: pointer;
-  border-radius: 8px;
-  margin-top: 10px;
-  font-size: larger;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-decoration: none;
   text-transform: uppercase;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.remove-button:hover {
-  background-color: #ffd54f;
-  transform: scale(1.05);
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 20px;
+  height: 70px;
+  width: 150px;
+  background-color: white;
+  transition: transform 0.2s ease-in-out;
 }
 
+.remove-button:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+.remove-button:hover {
+  transform: scale(1.05);
+}
+@media (min-width: 768px) {
+  .remove-button {
+    padding: 0.25em 0.75em;
+  }
+}
+.back-remove {
+  display: flex;
+  align-items: center;
+  gap: 500px;
+  margin-left: 10px;
+}
+
+.back-button,
+.remove-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* LoginPage.css */
 .login {
   max-width: 400px;
@@ -606,8 +635,13 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  transition: transform 0.2s ease-in-out;
 }
-
+.logo:hover {
+  transform: scale(1.05);
+}
 .landing-content {
   display: flex;
   flex-direction: column;
@@ -618,11 +652,11 @@ body {
 .welcome,
 .boba,
 .bunny,
-.button-82-pushable {
+.landing-button-pushable {
   margin: 10px 0;
 }
 
-.button-82-pushable {
+.landing-button-pushable {
   position: relative;
   border: none;
   background: transparent;
@@ -638,7 +672,7 @@ body {
   font-size: 22px;
 }
 
-.button-82-shadow {
+.landing-button-shadow {
   position: absolute;
   top: 0;
   left: 0;
@@ -651,7 +685,7 @@ body {
   transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
-.button-82-edge {
+.landing-button-edge {
   position: absolute;
   top: 0;
   left: 0;
@@ -667,7 +701,7 @@ body {
   );
 }
 
-.button-82-front {
+.landing-button-front {
   display: block;
   position: relative;
   padding: 12px 27px;
@@ -682,43 +716,43 @@ body {
 }
 
 @media (min-width: 768px) {
-  .button-82-front {
+  .landing-button-front {
     padding: 12px 42px;
   }
 
-  .button-82-front-text {
+  .landing-button-front-text {
     font-size: 22px;
   }
 }
-.button-82-pushable:hover {
+.landing-button-pushable:hover {
   filter: brightness(110%);
   -webkit-filter: brightness(110%);
 }
 
-.button-82-pushable:hover .button-82-front {
+.landing-button-pushable:hover .landing-button-front {
   transform: translateY(-10px);
   transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
-.button-82-pushable:active .button-82-front {
+.landing-button-pushable:active .landing-button-front {
   transform: translateY(-2px);
   transition: transform 34ms;
 }
 
-.button-82-pushable:hover .button-82-shadow {
+.landing-button-pushable:hover .landing-button-shadow {
   transform: translateY(4px);
   transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
-.button-82-pushable:active .button-82-shadow {
+.landing-button-pushable:active .landing-button-shadow {
   transform: translateY(1px);
   transition: transform 34ms;
 }
 
-.button-82-pushable:focus:not(:focus-visible) {
+.landing-button-pushable:focus:not(:focus-visible) {
   outline: none;
 }
-.button-82-front text {
+.landing-button-front text {
   font-size: xx-large;
 }
 .layout {
