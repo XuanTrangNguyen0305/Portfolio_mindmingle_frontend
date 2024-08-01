@@ -3,7 +3,8 @@ import { z } from "zod";
 import Viewer from "./Viewer";
 import router from "next/router";
 import Popup from "reactjs-popup";
-import ProgressBar from "./ProgressBar";
+import Progress_bar from "./Progress-bar";
+import Image from "next/image";
 const orderValidator = z
   .object({
     sugarLevelId: z.number().positive(),
@@ -206,84 +207,89 @@ const OrderForm = () => {
         <Viewer order={order} />
       </div>
       <form className="order-form" onSubmit={handleFormSubmit}>
-        <div className="wholeform-div">
-          <button className="universe-button" type="button" onClick={random}>
-            ✨ Let the Universe decide ✨
-          </button>
-          {showButtons1 && (
-            <div className="tea-milk">
-              {/* Teas */}
-              <div className="tea-selection">
-                <label className="label">Tea choices</label>
-                {options.teas.map((tea) => (
-                  <div key={tea.id} className="button-row">
-                    <button
-                      key={tea.id}
-                      type="button"
-                      className={`boba-button ${
-                        order.teaId === tea.id && "active"
-                      }`}
-                      onClick={() => {
-                        setOrder({ ...order, teaId: tea.id });
-                      }}
-                    >
-                      <h4>{tea.name}</h4>
-                      <h4> {tea.price} €</h4>
-                    </button>
-                    <Popup
-                      trigger={
-                        <button type="button" className="info-button">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="25"
-                            height="25"
-                            fill="hotpink"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                          </svg>
-                        </button>
-                      }
-                      position="right center"
-                    >
-                      <p className="description"> {tea.description}</p>
-                    </Popup>
-                  </div>
-                ))}
-              </div>
+        <button className="universe-button" type="button" onClick={random}>
+          ✨ Let the Universe decide ✨
+        </button>
+        {showButtons1 && (
+          <div className="tea-milk">
+            {/* Teas */}
+            <div className="tea-selection">
+              <label className="label">Tea choices</label>
+              {options.teas.map((tea) => (
+                <div key={tea.id} className="button-row">
+                  <button
+                    key={tea.id}
+                    type="button"
+                    className={`boba-button ${
+                      order.teaId === tea.id && "active"
+                    }`}
+                    onClick={() => {
+                      setOrder({ ...order, teaId: tea.id });
+                    }}
+                  >
+                    <h4>
+                      {tea.name} <br />
+                      {tea.price} €
+                    </h4>
+                  </button>
+                  <Popup
+                    trigger={
+                      <button type="button" className="info-button">
+                        <Image
+                          className="info"
+                          src="/image/info-icon.svg"
+                          alt="info"
+                          width={25}
+                          height={25}
+                        />
+                      </button>
+                    }
+                    position="right center"
+                  >
+                    <p className="description"> {tea.description}</p>
+                  </Popup>
+                </div>
+              ))}
+            </div>
 
-              {/* Milk */}
-              <div className="milk-selection">
-                <label className="label">Milk choices</label>
-                {options.milk.map((milk) => (
-                  <div key={milk.id}>
-                    <button
-                      key={milk.id}
-                      type="button"
-                      className={`boba-button ${
-                        order.milkId === milk.id && "active"
-                      }`}
-                      onClick={() => {
-                        setOrder({ ...order, milkId: milk.id });
-                      }}
-                    >
-                      <h4>{milk.name}</h4>
-                      <h4> {milk.price} €</h4>
-                    </button>
-                  </div>
-                ))}
+            {/* Milk */}
+            <div className="milk-selection">
+              <label className="label">Milk choices</label>
+              {options.milk.map((milk) => (
+                <div key={milk.id}>
+                  <button
+                    key={milk.id}
+                    type="button"
+                    className={`boba-button ${
+                      order.milkId === milk.id && "active"
+                    }`}
+                    onClick={() => {
+                      setOrder({ ...order, milkId: milk.id });
+                    }}
+                  >
+                    <h4>
+                      {milk.name} <br /> {milk.price} €
+                    </h4>
+                  </button>
+                </div>
+              ))}
+              <div className="progress-buttons-container">
+                <Progress_bar bgcolor="#2846a6" progress={0} height="30px" />
                 <button className="next-button" onClick={showNextButtons}>
-                  Next
+                  <Image
+                    src="/image/next-button.svg"
+                    alt="next"
+                    width={80}
+                    height={80}
+                  />
                 </button>
-                <ProgressBar bgcolor={"blue"} completed={0} />
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {showButtons2 && (
-          <>
+          <div>
             <div className="tea-milk">
               {/* Flavors */}
               <div className="tea-selection">
@@ -305,16 +311,13 @@ const OrderForm = () => {
                     <Popup
                       trigger={
                         <button type="button" className="info-button">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="25"
-                            height="25"
-                            fill="hotpink"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                          </svg>
+                          <Image
+                            className="info"
+                            src="/image/info-icon.svg"
+                            alt="info"
+                            width={25}
+                            height={25}
+                          />
                         </button>
                       }
                       position="right center"
@@ -340,22 +343,21 @@ const OrderForm = () => {
                         setOrder({ ...order, toppingId: topping.id });
                       }}
                     >
-                      <h4>{topping.name}</h4>
-                      <h4>{topping.price} €</h4>
+                      <h4>
+                        {topping.name} <br />
+                        {topping.price}€
+                      </h4>
                     </button>
                     <Popup
                       trigger={
                         <button type="button" className="info-button">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="25"
-                            height="25"
-                            fill="hotpink"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                          </svg>
+                          <Image
+                            className="info"
+                            src="/image/info-icon.svg"
+                            alt="info"
+                            width={25}
+                            height={25}
+                          />
                         </button>
                       }
                       position="right center"
@@ -366,20 +368,32 @@ const OrderForm = () => {
                 ))}
               </div>
             </div>
-            <div className="next-back">
-              <button
-                type="button"
-                className="back-button"
-                onClick={showBackButton}
-              >
-                Back
-              </button>
-              <button className="next-button1" onClick={showFinalButtons}>
-                Next
-              </button>
-              <ProgressBar bgcolor={"blue"} completed={50} />
+            <div className="progress-buttons-container">
+              <Progress_bar bgcolor="#2846a6" progress={50} height="30px" />
+              <div className="next-back">
+                <button
+                  type="button"
+                  className="back-button"
+                  onClick={showBackButton}
+                >
+                  <Image
+                    src="/image/back-button.svg"
+                    alt="back"
+                    width={80}
+                    height={80}
+                  />
+                </button>
+                <button className="next-button1" onClick={showFinalButtons}>
+                  <Image
+                    src="/image/next-button.svg"
+                    alt="next"
+                    width={80}
+                    height={80}
+                  />
+                </button>
+              </div>
             </div>
-          </>
+          </div>
         )}
 
         {showButtons3 && (
@@ -440,26 +454,43 @@ const OrderForm = () => {
                         setOrder({ ...order, cupId: cup.id });
                       }}
                     >
-                      <h4>{cup.name}</h4>
-                      <h4>{cup.price} €</h4>
+                      <h4>
+                        {cup.name}
+                        <br />
+                        {cup.price}€
+                      </h4>
                     </button>
                   </div>
                 ))}
               </div>
             </div>
-            <div>
+            <div className="progress-buttons-container">
+              <Progress_bar
+                bgcolor="#2846a6"
+                progress={100} // Use number here, not a string
+                height="30px"
+              />
               <div className="submit-back">
                 <button
                   type="button"
                   className="back-button1"
                   onClick={showBackButton2}
                 >
-                  Back
+                  <Image
+                    src="/image/back-button.svg"
+                    alt="back"
+                    width={80}
+                    height={80}
+                  />
                 </button>
-                <button type="submit" className="submit-button">
-                  Submit
+                <button className="next-button1" onClick={showFinalButtons}>
+                  <Image
+                    src="/image/next-button.svg"
+                    alt="next"
+                    width={80}
+                    height={80}
+                  />
                 </button>
-                <ProgressBar bgcolor={"blue"} completed={100} />
               </div>
             </div>
           </>

@@ -1,37 +1,41 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import Image from "next/image";
-import bubbletea from "../image/bubbletea.png"; // Adjust the path if necessary
 
 export default function Land() {
   const router = useRouter();
-
-  // useEffect(() => {
-  //   const tokenFromStorage = localStorage.getItem("token");
-  //   if (tokenFromStorage) {
-  //     router.push("/home");
-  //   }
-  // }, [router]);
-
   const handleStartClick = () => {
     router.push("/home");
   };
 
   return (
-    <div className="landing">
-      <div onClick={handleStartClick} className="landing-image-wrapper">
+    <div className="landing-page">
+      <div className="landing">
         <Image
-          src={bubbletea}
-          alt="Bubble Tea"
-          className="landing-image"
+          className="logo"
+          src="/image/logo2.png"
           width={200}
-          height={200}
+          height={110}
+          alt={"logo"}
         />
+        <div className="landing-content">
+          <Image
+            className="bunny"
+            src="/image/bunny2.png"
+            alt="bunny"
+            width={850}
+            height={650}
+          />
+          <button
+            onClick={handleStartClick}
+            className="button-82-pushable"
+            role="button"
+          >
+            <span className="button-82-shadow"></span>
+            <span className="button-82-edge"></span>
+            <span className="button-82-front text">Enter</span>
+          </button>
+        </div>
       </div>
-      <h1 className="landing-h1">Welcome to Boba Dream</h1>
-      <button className="landing-button" onClick={handleStartClick}>
-        ⭐Start to dream🌙
-      </button>
     </div>
   );
 }

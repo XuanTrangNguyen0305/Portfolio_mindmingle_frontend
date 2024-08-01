@@ -173,7 +173,6 @@ const ViewSugarLevel = (props: ViewSugarProps) => {
 const Viewer = ({ order }: ViewerProps) => {
   return (
     <div className="canvas-box">
-      {/* <ViewCup cupId={order.cupId} /> */}
       <Canvas>
         <OrbitControls
           maxDistance={1.5}
