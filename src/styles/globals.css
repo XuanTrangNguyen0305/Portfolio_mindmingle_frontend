@@ -18,6 +18,7 @@ body {
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 500px;
+  gap: 50px;
 }
 
 .order-form {

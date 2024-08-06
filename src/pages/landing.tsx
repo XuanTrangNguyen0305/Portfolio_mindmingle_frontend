@@ -22,8 +22,8 @@ export default function Land() {
             className="bunny"
             src="/image/bunny2.png"
             alt="bunny"
-            width={600}
-            height={450}
+            width={900}
+            height={700}
           />
           <button
             onClick={handleStartClick}
