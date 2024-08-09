@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import router from "next/router";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,34 +15,27 @@ const Navbar = () => {
     localStorage.removeItem("token");
     location.reload();
   };
-
+  const pushBack = () => {
+    router.push("/home");
+  };
   return (
     <div className="nav-bar-logo">
+      <Image
+        className="logo"
+        src="/image/logo2.png"
+        width={200}
+        height={110}
+        alt={"logo"}
+        onClick={pushBack}
+      />
       <nav className="nav-bar">
         <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
           <button className="home-button">
             <Link href="/home">Home</Link>
           </button>
-          {/* <li>
-            <Link href="/">About Us</Link>
-          </li> */}
-
           <button className="order-button">
             <Link href="/orders">Your Orders</Link>
           </button>
-          {/* {isLoggedIn ? (
-            <>
-              <button className="logout-button">
-                <button className="logout" onClick={logOut}>
-                  Log Out
-                </button>
-              </button>
-            </>
-          ) : (
-            <button className="login-button">
-              <Link href="/login">Login</Link>
-            </button>
-          )} */}
         </ul>
       </nav>
     </div>
