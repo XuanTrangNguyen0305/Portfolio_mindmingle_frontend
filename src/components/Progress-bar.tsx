@@ -21,7 +21,7 @@ const Progress_bar: React.FC<ProgressBarProps> = ({
 
   const Parentdiv: React.CSSProperties = {
     height: height,
-    width: "100%",
+    width: "70%",
     backgroundColor: "white",
     borderRadius: 40,
     marginTop: 50,

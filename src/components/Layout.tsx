@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import Navbar from "./NavBar";
 import Image from "next/image";
-import Footer from "./Footer";
 import router, { useRouter } from "next/router";
 
 interface LayoutProps {
@@ -27,7 +26,6 @@ const Layout = (props: LayoutProps) => {
       />
       <Navbar />
       <main>{props.children}</main>
-      <Footer />
     </div>
   );
 };

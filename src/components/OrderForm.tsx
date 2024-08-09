@@ -257,7 +257,6 @@ const OrderForm = () => {
                 </div>
               ))}
               <div className="progress-buttons-container">
-                <Progress_bar bgcolor="#2846a6" progress={20} height="30px" />
                 <button className="next-button" onClick={showNextButtons}>
                   <Image
                     src="/image/next-button.svg"
